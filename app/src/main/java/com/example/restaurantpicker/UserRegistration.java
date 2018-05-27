@@ -2,6 +2,7 @@ package com.example.restaurantpicker;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -14,13 +15,16 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.HashMap;
 import java.util.Map;
 
 public class UserRegistration extends AppCompatActivity {
 
     Button register;
-    EditText editTextName, editTextEmail,editTextPassword,editTextPhone;
+    EditText editTextName, editTextEmail, editTextPassword, editTextPhone;
 
 
     @Override
@@ -45,12 +49,58 @@ public class UserRegistration extends AppCompatActivity {
         final String tempPassword = editTextPassword.getText().toString().trim();
         final String tempPhone = editTextPhone.getText().toString().trim();
 
+        //data validation
+        if (TextUtils.isEmpty(tempName)) {
+            editTextName.setError("Please enter name");
+            editTextName.requestFocus();
+            return;
+        }
 
-        StringRequest stringRequest = new StringRequest(Request.Method.POST,Constants.USER_REGISTRATION_URL, new Response.Listener<String>() {
+        if (TextUtils.isEmpty(tempEmail)) {
+            editTextEmail.setError("Please enter your email");
+            editTextEmail.requestFocus();
+            return;
+        }
+
+        if (!android.util.Patterns.EMAIL_ADDRESS.matcher(tempEmail).matches()) {
+            editTextEmail.setError("Enter a valid email");
+            editTextEmail.requestFocus();
+            return;
+        }
+
+        if (TextUtils.isEmpty(tempPassword)) {
+            editTextPassword.setError("Enter a password");
+            editTextPassword.requestFocus();
+            return;
+        }
+
+        if (TextUtils.isEmpty(tempPhone)) {
+            editTextPhone.setError("Enter a phone number");
+            editTextPhone.requestFocus();
+            return;
+        }
+
+
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, Constants.USER_REGISTRATION_URL, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                Toast.makeText(getApplicationContext(), response, Toast.LENGTH_SHORT).show();
-                Log.d(Constants.LOGTAG, response);
+                //Toast.makeText(getApplicationContext(), response, Toast.LENGTH_SHORT).show();
+                Log.d(Constants.LOGTAG, "on response");
+
+                try {
+                    JSONObject obj = new JSONObject(response);
+                    if (!obj.getBoolean("error")) {
+                        Toast.makeText(getApplicationContext(), obj.getString("message"), Toast.LENGTH_SHORT).show();
+                        Log.d(Constants.LOGTAG, obj.getString("message"));
+                    } else {
+                        Toast.makeText(getApplicationContext(), obj.getString("message"), Toast.LENGTH_SHORT).show();
+                        Log.d(Constants.LOGTAG, obj.getString("message"));
+                    }
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    Log.d(Constants.LOGTAG, e.getLocalizedMessage());
+                }
 
             }
         }, new Response.ErrorListener() {
@@ -58,7 +108,7 @@ public class UserRegistration extends AppCompatActivity {
             public void onErrorResponse(VolleyError error) {
 
             }
-        }){
+        }) {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> params = new HashMap<>();
