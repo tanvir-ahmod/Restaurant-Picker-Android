@@ -40,15 +40,14 @@ public class GetAllRestaurants extends AppCompatActivity {
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setAdapter(restaurantAdapter);
 
-        // getAllRestaurants();
+        getAllRestaurants();
 
         // Log.d(Constants.LOGTAG, restaurantsData.size() + "");
 
-        insertDummyData();
+        // insertDummyData();
     }
 
-    private void insertDummyData()
-    {
+    private void insertDummyData() {
         Restaurant restaurant = new Restaurant();
         restaurant.setName("aaaa");
         restaurant.setPhone("0000");
@@ -105,6 +104,8 @@ public class GetAllRestaurants extends AppCompatActivity {
                             e.printStackTrace();
                             Log.d(Constants.LOGTAG, e.getLocalizedMessage());
                         }
+
+                        restaurantAdapter.notifyDataSetChanged();
                     }
                 },
                 new Response.ErrorListener() {
