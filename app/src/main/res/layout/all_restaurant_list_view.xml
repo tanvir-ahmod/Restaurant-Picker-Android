@@ -16,8 +16,8 @@
 
             <ImageView
                 android:id="@+id/restaurant_image"
-                android:layout_width="@dimen/restaurant_image_width"
-                android:layout_height="@dimen/restaurant_image_height"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:clickable="true"
                 android:focusable="true"
                 android:scaleType="centerCrop"

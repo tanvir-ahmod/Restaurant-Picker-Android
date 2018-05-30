@@ -93,10 +93,10 @@ public class GetAllRestaurants extends AppCompatActivity {
                                     String name = restaurant.getString("name");
                                     String phone = restaurant.getString("phone");
                                     String image = restaurant.getString("image");
-                                    Bitmap bitmap = volleyImageLoader(Constants.RESTAURANT_IMAGE_URL + image);
+                                    //Bitmap bitmap = volleyImageLoader(Constants.RESTAURANT_IMAGE_URL + image);
 
                                     Restaurant restaurantModel = new Restaurant(id, name, phone, image);
-                                    restaurantModel.setRestaurantImage(bitmap);
+                                   // restaurantModel.setRestaurantImage(bitmap);
                                     restaurantsData.add(restaurantModel);
 
                                 }

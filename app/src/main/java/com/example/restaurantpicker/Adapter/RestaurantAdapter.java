@@ -4,8 +4,10 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.example.restaurantpicker.R;
 import com.example.restaurantpicker.Models.Restaurant;
 
@@ -34,6 +36,10 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Re
     public void onBindViewHolder(RestaurantViewHolder holder, int position) {
         holder.restaurantName.setText(restaurantList.get(position).getName());
         holder.restaurantPhone.setText(restaurantList.get(position).getPhone());
+
+        Glide.with(holder.restaurantImage.getContext()).load(restaurantList.get(position).getImage()).into(holder.restaurantImage);
+
+        //holder.restaurantImage.setImageBitmap(restaurantList.get(position).getRestaurantImage());
     }
 
     @Override
@@ -44,11 +50,13 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Re
     public class RestaurantViewHolder extends RecyclerView.ViewHolder {
         public TextView restaurantName;
         public TextView restaurantPhone;
+        public ImageView restaurantImage;
 
         public RestaurantViewHolder(View view) {
             super(view);
-            restaurantName = (TextView) view.findViewById(R.id.restaurant_name_textview);
-            restaurantPhone = (TextView) view.findViewById(R.id.restaurant_phone_textview);
+            restaurantName = view.findViewById(R.id.restaurant_name_textview);
+            restaurantPhone = view.findViewById(R.id.restaurant_phone_textview);
+            restaurantImage = view.findViewById(R.id.restaurant_image);
         }
     }
 }
