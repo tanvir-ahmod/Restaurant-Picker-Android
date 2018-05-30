@@ -18,4 +18,9 @@
     <dimen name="ic_album_overflow_width">20dp</dimen>
     <dimen name="ic_album_overflow_height">30dp</dimen>
     <dimen name="ic_album_overflow_margin_top">10dp</dimen>
+
+    <dimen name="restaurant_name">20sp</dimen>
+    <dimen name="restaurant_phone">16sp</dimen>
+    <dimen name="restaurant_image_height">160dp</dimen>
+    <dimen name="restaurant_image_width">100dp</dimen>
 </resources>

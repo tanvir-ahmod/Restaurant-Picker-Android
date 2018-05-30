@@ -6,9 +6,12 @@ package com.example.restaurantpicker;
 
 public class Constants {
 
-    public static final String USER_REGISTRATION_URL = "http://192.168.161.1/Restaurant%20Picker/user_registration.php";
-    public static final String USER_LOGIN_URL = "http://192.168.161.1/Restaurant%20Picker/user_login.php";
-    public static final String GET_RESTAURANT = "http://192.168.161.1/Restaurant%20Picker/restaurant_info_api.php";
+    private static final String BASE_URL = "http://192.168.161.1/Restaurant%20Picker/";
+
+    public static final String USER_REGISTRATION_URL = "user_registration.php";
+    public static final String USER_LOGIN_URL = BASE_URL + "user_login.php";
+    public static final String GET_RESTAURANT = BASE_URL + "restaurant_info_api.php";
+    public static final String RESTAURANT_IMAGE_URL = BASE_URL;
 
     public static final String REQUEST_TAG = "com.example.restaurantpicker";
     public static final String LOGTAG = "logtag";

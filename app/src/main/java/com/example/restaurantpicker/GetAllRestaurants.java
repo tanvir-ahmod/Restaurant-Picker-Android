@@ -1,5 +1,6 @@
 package com.example.restaurantpicker;
 
+import android.graphics.Bitmap;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -9,6 +10,7 @@ import android.util.Log;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.StringRequest;
 import com.example.restaurantpicker.Adapter.RestaurantAdapter;
 import com.example.restaurantpicker.Models.Restaurant;
@@ -25,6 +27,8 @@ public class GetAllRestaurants extends AppCompatActivity {
 
     RecyclerView recyclerView;
     RestaurantAdapter restaurantAdapter;
+
+    Bitmap tempImage;
 
 
     @Override
@@ -89,8 +93,10 @@ public class GetAllRestaurants extends AppCompatActivity {
                                     String name = restaurant.getString("name");
                                     String phone = restaurant.getString("phone");
                                     String image = restaurant.getString("image");
+                                    Bitmap bitmap = volleyImageLoader(Constants.RESTAURANT_IMAGE_URL + image);
 
                                     Restaurant restaurantModel = new Restaurant(id, name, phone, image);
+                                    restaurantModel.setRestaurantImage(bitmap);
                                     restaurantsData.add(restaurantModel);
 
                                 }
@@ -126,5 +132,32 @@ public class GetAllRestaurants extends AppCompatActivity {
 
         AppSingleton.getInstance(getApplicationContext()).addToRequestQueue(stringRequest, Constants.REQUEST_TAG);
 
+    }
+
+
+    public Bitmap volleyImageLoader(final String url) {
+
+        tempImage = null;
+        //Log.e(Constants.LOGTAG, "Image URL : " + url);
+
+        ImageLoader imageLoader = AppSingleton.getInstance(getApplicationContext()).getImageLoader();
+
+        imageLoader.get(url, new ImageLoader.ImageListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.e(Constants.LOGTAG, "Image Load Error: " + error.getMessage());
+            }
+
+            @Override
+            public void onResponse(ImageLoader.ImageContainer response, boolean arg1) {
+                if (response.getBitmap() != null) {
+
+                    tempImage = response.getBitmap();
+                    Log.d(Constants.LOGTAG, "Image loaded for" + url);
+                }
+            }
+        });
+
+        return tempImage;
     }
 }

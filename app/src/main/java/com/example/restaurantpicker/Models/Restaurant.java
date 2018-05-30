@@ -1,5 +1,7 @@
 package com.example.restaurantpicker.Models;
 
+import android.graphics.Bitmap;
+
 /**
  * Created by Shoukhin on 5/29/2018.
  */
@@ -9,10 +11,8 @@ public class Restaurant {
     private String name;
     private String phone;
     private String image;
+    private Bitmap restaurantImage;
 
-    public String getId() {
-        return id;
-    }
 
     public Restaurant() {
     }
@@ -52,4 +52,17 @@ public class Restaurant {
     public void setImage(String image) {
         this.image = image;
     }
+
+    public Bitmap getRestaurantImage() {
+        return restaurantImage;
+    }
+
+    public void setRestaurantImage(Bitmap restaurantImage) {
+        this.restaurantImage = restaurantImage;
+    }
+
+    public String getId() {
+        return id;
+    }
+
 }
