@@ -1,18 +1,23 @@
 package com.example.restaurantpicker.Adapter;
 
 import android.content.Context;
+import android.content.Intent;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.example.restaurantpicker.Constants;
 import com.example.restaurantpicker.R;
 import com.example.restaurantpicker.Models.Restaurant;
+import com.example.restaurantpicker.RestaurantProducts;
 
 import java.util.List;
 
@@ -38,18 +43,22 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Re
     }
 
     @Override
-    public void onBindViewHolder(RestaurantViewHolder holder, int position) {
+    public void onBindViewHolder(RestaurantViewHolder holder, final int position) {
         holder.restaurantName.setText(restaurantList.get(position).getName());
         holder.restaurantPhone.setText(restaurantList.get(position).getPhone());
 
-        //String url = "http://192.168.161.1/Restaurant%20Picker/images/happy.jpg";
         String imageUrl = Constants.RESTAURANT_IMAGE_URL + restaurantList.get(position).getImage();
         Glide.with(context).load(imageUrl).into(holder.restaurantImage);
 
-        Log.d(Constants.LOGTAG, restaurantList.get(position).getImage());
+        holder.relativeLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context, RestaurantProducts.class);
+                intent.putExtra("id", restaurantList.get(position).getId());
+                context.startActivity(intent);
+            }
+        });
 
-        //holder.restaurantImage.setImageResource(R.drawable.ic_dots);
-        //holder.restaurantImage.setImageBitmap(restaurantList.get(position).getRestaurantImage());
     }
 
     @Override
@@ -61,12 +70,14 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Re
         public TextView restaurantName;
         public TextView restaurantPhone;
         public ImageView restaurantImage;
+        public RelativeLayout relativeLayout;
 
         public RestaurantViewHolder(View view) {
             super(view);
             restaurantName = view.findViewById(R.id.restaurant_name_textview);
             restaurantPhone = view.findViewById(R.id.restaurant_phone_textview);
             restaurantImage = view.findViewById(R.id.restaurant_image);
+            relativeLayout = view.findViewById(R.id.restaurant_layout);
         }
     }
 }

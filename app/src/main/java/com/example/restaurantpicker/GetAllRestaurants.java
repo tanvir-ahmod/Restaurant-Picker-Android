@@ -43,9 +43,6 @@ public class GetAllRestaurants extends AppCompatActivity {
 
         getAllRestaurants();
 
-        // Log.d(Constants.LOGTAG, restaurantsData.size() + "");
-
-        // insertDummyData();
     }
 
     private void getAllRestaurants() {
@@ -59,7 +56,6 @@ public class GetAllRestaurants extends AppCompatActivity {
 
                             //if no error in response
                             if (!obj.getBoolean("error")) {
-                                //Log.d(Constants.LOGTAG, obj.getString("message"));
 
                                 JSONArray restaurants = obj.getJSONArray("restaurant");
 
@@ -70,10 +66,8 @@ public class GetAllRestaurants extends AppCompatActivity {
                                     String name = restaurant.getString("name");
                                     String phone = restaurant.getString("phone");
                                     String image = restaurant.getString("image");
-                                    //Bitmap bitmap = volleyImageLoader(Constants.RESTAURANT_IMAGE_URL + image);
 
                                     Restaurant restaurantModel = new Restaurant(id, name, phone, image);
-                                   // restaurantModel.setRestaurantImage(bitmap);
                                     restaurantsData.add(restaurantModel);
 
                                 }
