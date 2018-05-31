@@ -89,15 +89,7 @@ public class GetAllRestaurants extends AppCompatActivity {
                         //Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_SHORT).show();
                         Log.d(Constants.LOGTAG, error.getMessage());
                     }
-                }) {
-            /*@Override
-            protected Map<String, String> getParams() throws AuthFailureError {
-                Map<String, String> params = new HashMap<>();
-                params.put("email", tempEmail);
-                params.put("password", password);
-                return params;
-            }*/
-        };
+                });
 
         AppSingleton.getInstance(getApplicationContext()).addToRequestQueue(stringRequest, Constants.REQUEST_TAG);
 

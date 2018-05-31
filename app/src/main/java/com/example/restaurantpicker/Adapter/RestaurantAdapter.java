@@ -54,7 +54,7 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Re
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(context, RestaurantProducts.class);
-                intent.putExtra("id", restaurantList.get(position).getId());
+                intent.putExtra(Constants.RESTAURANT_ID, restaurantList.get(position).getId());
                 context.startActivity(intent);
             }
         });
