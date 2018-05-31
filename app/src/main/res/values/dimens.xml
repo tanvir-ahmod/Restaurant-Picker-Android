@@ -21,6 +21,7 @@
 
     <dimen name="restaurant_name">20sp</dimen>
     <dimen name="restaurant_phone">16sp</dimen>
-    <dimen name="restaurant_image_height">160dp</dimen>
+    <dimen name="restaurant_image_height">120dp</dimen>
     <dimen name="restaurant_image_width">100dp</dimen>
+    <dimen name="restaurant_relative_margin">5dp</dimen>
 </resources>

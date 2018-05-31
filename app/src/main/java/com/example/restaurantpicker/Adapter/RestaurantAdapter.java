@@ -1,6 +1,8 @@
 package com.example.restaurantpicker.Adapter;
 
+import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.example.restaurantpicker.Constants;
 import com.example.restaurantpicker.R;
 import com.example.restaurantpicker.Models.Restaurant;
 
@@ -19,9 +22,11 @@ import java.util.List;
 public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.RestaurantViewHolder> {
 
     private List<Restaurant> restaurantList;
+    private Context context;
 
-    public RestaurantAdapter(List<Restaurant> restaurantList) {
+    public RestaurantAdapter(List<Restaurant> restaurantList, Context context) {
         this.restaurantList = restaurantList;
+        this.context = context;
     }
 
     @Override
@@ -37,8 +42,13 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Re
         holder.restaurantName.setText(restaurantList.get(position).getName());
         holder.restaurantPhone.setText(restaurantList.get(position).getPhone());
 
-        Glide.with(holder.restaurantImage.getContext()).load(restaurantList.get(position).getImage()).into(holder.restaurantImage);
+        //String url = "http://192.168.161.1/Restaurant%20Picker/images/happy.jpg";
+        String imageUrl = Constants.RESTAURANT_IMAGE_URL + restaurantList.get(position).getImage();
+        Glide.with(context).load(imageUrl).into(holder.restaurantImage);
 
+        Log.d(Constants.LOGTAG, restaurantList.get(position).getImage());
+
+        //holder.restaurantImage.setImageResource(R.drawable.ic_dots);
         //holder.restaurantImage.setImageBitmap(restaurantList.get(position).getRestaurantImage());
     }
 

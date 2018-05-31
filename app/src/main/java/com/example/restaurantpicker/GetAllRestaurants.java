@@ -28,9 +28,6 @@ public class GetAllRestaurants extends AppCompatActivity {
     RecyclerView recyclerView;
     RestaurantAdapter restaurantAdapter;
 
-    Bitmap tempImage;
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,7 +35,7 @@ public class GetAllRestaurants extends AppCompatActivity {
 
         recyclerView = findViewById(R.id.all_restaurant_recyclerview);
 
-        restaurantAdapter = new RestaurantAdapter(restaurantsData);
+        restaurantAdapter = new RestaurantAdapter(restaurantsData, this);
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
 
         recyclerView.setLayoutManager(mLayoutManager);
@@ -49,26 +46,6 @@ public class GetAllRestaurants extends AppCompatActivity {
         // Log.d(Constants.LOGTAG, restaurantsData.size() + "");
 
         // insertDummyData();
-    }
-
-    private void insertDummyData() {
-        Restaurant restaurant = new Restaurant();
-        restaurant.setName("aaaa");
-        restaurant.setPhone("0000");
-        restaurantsData.add(restaurant);
-
-        restaurant = new Restaurant();
-        restaurant.setName("bbbbb");
-        restaurant.setPhone("11111");
-        restaurantsData.add(restaurant);
-
-        restaurant = new Restaurant();
-        restaurant.setName("ccccc");
-        restaurant.setPhone("22222");
-        restaurantsData.add(restaurant);
-
-        restaurantAdapter.notifyDataSetChanged();
-
     }
 
     private void getAllRestaurants() {
@@ -101,8 +78,6 @@ public class GetAllRestaurants extends AppCompatActivity {
 
                                 }
 
-                                //Log.d(Constants.LOGTAG, restaurantsData.size() + "");
-
                             } else {
                                 Log.d(Constants.LOGTAG, obj.getString("message"));
                             }
@@ -132,32 +107,5 @@ public class GetAllRestaurants extends AppCompatActivity {
 
         AppSingleton.getInstance(getApplicationContext()).addToRequestQueue(stringRequest, Constants.REQUEST_TAG);
 
-    }
-
-
-    public Bitmap volleyImageLoader(final String url) {
-
-        tempImage = null;
-        //Log.e(Constants.LOGTAG, "Image URL : " + url);
-
-        ImageLoader imageLoader = AppSingleton.getInstance(getApplicationContext()).getImageLoader();
-
-        imageLoader.get(url, new ImageLoader.ImageListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                Log.e(Constants.LOGTAG, "Image Load Error: " + error.getMessage());
-            }
-
-            @Override
-            public void onResponse(ImageLoader.ImageContainer response, boolean arg1) {
-                if (response.getBitmap() != null) {
-
-                    tempImage = response.getBitmap();
-                    Log.d(Constants.LOGTAG, "Image loaded for" + url);
-                }
-            }
-        });
-
-        return tempImage;
     }
 }
