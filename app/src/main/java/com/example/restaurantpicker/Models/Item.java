@@ -10,6 +10,7 @@ public class Item {
     private String price;
     private String imageURL;
     private String restaurantID;
+    private String restaurantName;
 
     public Item() {
 
@@ -61,5 +62,13 @@ public class Item {
 
     public void setRestaurantID(String restaurantID) {
         this.restaurantID = restaurantID;
+    }
+
+    public String getRestaurantName() {
+        return restaurantName;
+    }
+
+    public void setRestaurantName(String restaurantName) {
+        this.restaurantName = restaurantName;
     }
 }

@@ -24,10 +24,17 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
 
     private List<Item> itemList;
     private Context context;
+    private boolean visibleRestaurantName = false;
+
 
     public ItemAdapter(List<Item> itemList, Context context) {
         this.itemList = itemList;
         this.context = context;
+    }
+
+    //Used to visible / invisible restaurant name in recycler view
+    public void setVisibleRestaurantName(boolean visibleRestaurantName) {
+        this.visibleRestaurantName = visibleRestaurantName;
     }
 
     @NonNull
@@ -48,6 +55,12 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
         String imageURL = Constants.ITEM_IMAGE_URL + itemList.get(position).getImageURL();
         Glide.with(context).load(imageURL).into(holder.itemImage);
 
+        if (visibleRestaurantName) {
+            holder.restaurantName.setVisibility(View.VISIBLE);
+            holder.restaurantName.setText(itemList.get(position).getRestaurantName());
+        } else
+            holder.restaurantName.setVisibility(View.GONE);
+
     }
 
     @Override
@@ -56,6 +69,7 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
     }
 
     public class ItemViewHolder extends RecyclerView.ViewHolder {
+        public TextView restaurantName;
         public TextView itemName;
         public TextView itemPrice;
         public ImageView itemImage;
@@ -65,6 +79,7 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
             itemName = view.findViewById(R.id.item_name);
             itemPrice = view.findViewById(R.id.item_price);
             itemImage = view.findViewById(R.id.item_image);
+            restaurantName = view.findViewById(R.id.restaurant_name);
         }
     }
 }

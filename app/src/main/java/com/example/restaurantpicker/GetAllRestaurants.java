@@ -1,11 +1,15 @@
 package com.example.restaurantpicker;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 
 import com.android.volley.Request;
 import com.android.volley.Response;
@@ -28,6 +32,9 @@ public class GetAllRestaurants extends AppCompatActivity {
     RecyclerView recyclerView;
     RestaurantAdapter restaurantAdapter;
 
+    EditText editTextSearch;
+    Button searchButton;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,6 +49,22 @@ public class GetAllRestaurants extends AppCompatActivity {
         recyclerView.setAdapter(restaurantAdapter);
 
         getAllRestaurants();
+
+        editTextSearch = findViewById(R.id.search_edit_text);
+        searchButton = findViewById(R.id.search_button);
+
+        searchButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                String searchKey = editTextSearch.getText().toString();
+
+                Intent intent = new Intent(GetAllRestaurants.this, SearchResult.class);
+                intent.putExtra(Constants.SEARCH_KEY, searchKey);
+                startActivity(intent);
+
+            }
+        });
 
     }
 

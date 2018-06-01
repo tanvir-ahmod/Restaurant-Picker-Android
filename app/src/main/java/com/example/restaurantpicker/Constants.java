@@ -22,4 +22,9 @@ public class Constants {
     public static final String RESTAURANT_ITEM_URL = BASE_URL + "show_restaurant_product_api.php";
     public static final String ITEM_IMAGE_URL = BASE_URL;
 
+    //search
+    public static final String SEARCH_KEY = "searchkey";
+    public static final String SEARCH_ITEM_URL = BASE_URL + "search_all_items_api.php";
+
+
 }
