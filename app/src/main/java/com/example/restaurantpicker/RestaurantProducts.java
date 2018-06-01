@@ -10,6 +10,7 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
+import com.example.restaurantpicker.Models.Item;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -59,18 +60,19 @@ public class RestaurantProducts extends AppCompatActivity {
 
                                 JSONArray items = obj.getJSONArray("items");
 
-                               /* for (int i = 0; i < restaurants.length(); i++) {
-                                    JSONObject restaurant = restaurants.getJSONObject(i);
+                                for (int i = 0; i < items.length(); i++) {
+                                    JSONObject item = items.getJSONObject(i);
 
-                                    String id = restaurant.getString("id");
-                                    String name = restaurant.getString("name");
-                                    String phone = restaurant.getString("phone");
-                                    String image = restaurant.getString("image");
+                                    String id = item.getString("id");
+                                    String name = item.getString("item_name");
+                                    String price = item.getString("price");
+                                    String image = item.getString("image");
 
-                                    Restaurant restaurantModel = new Restaurant(id, name, phone, image);
-                                    restaurantsData.add(restaurantModel);
+                                    Item itemModel = new Item(id, name, price, image, restaurantId);
+                                    // restaurantsData.add(restaurantModel);
+                                    //Log.d(Constants.LOGTAG,itemModel.toString());
 
-                                }*/
+                                }
 
                             } else {
                                 Log.d(Constants.LOGTAG, obj.getString("message"));
