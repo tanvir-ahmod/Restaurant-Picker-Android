@@ -2,6 +2,7 @@ package com.example.restaurantpicker;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -43,7 +44,7 @@ public class RestaurantItems extends AppCompatActivity {
         recyclerView = findViewById(R.id.item_recycler_view);
         itemAdapter = new ItemAdapter(itemData, this);
 
-        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
+        RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(this,2);
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setAdapter(itemAdapter);
 
