@@ -20,6 +20,6 @@ public class Constants {
     //to get item of a restaurant
     public static final String RESTAURANT_ID = "restaurantid";
     public static final String RESTAURANT_ITEM_URL = BASE_URL + "show_restaurant_product_api.php";
-
+    public static final String ITEM_IMAGE_URL = BASE_URL;
 
 }

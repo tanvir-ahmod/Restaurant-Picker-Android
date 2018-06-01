@@ -2,22 +2,19 @@ package com.example.restaurantpicker.Adapter;
 
 import android.content.Context;
 import android.content.Intent;
-import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.example.restaurantpicker.Constants;
 import com.example.restaurantpicker.R;
 import com.example.restaurantpicker.Models.Restaurant;
-import com.example.restaurantpicker.RestaurantProducts;
+import com.example.restaurantpicker.RestaurantItems;
 
 import java.util.List;
 
@@ -53,7 +50,7 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Re
         holder.relativeLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(context, RestaurantProducts.class);
+                Intent intent = new Intent(context, RestaurantItems.class);
                 intent.putExtra(Constants.RESTAURANT_ID, restaurantList.get(position).getId());
                 context.startActivity(intent);
             }

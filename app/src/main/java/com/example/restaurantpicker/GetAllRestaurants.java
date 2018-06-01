@@ -34,8 +34,8 @@ public class GetAllRestaurants extends AppCompatActivity {
         setContentView(R.layout.activity_get_all_restaurants);
 
         recyclerView = findViewById(R.id.all_restaurant_recyclerview);
-
         restaurantAdapter = new RestaurantAdapter(restaurantsData, this);
+
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
 
         recyclerView.setLayoutManager(mLayoutManager);

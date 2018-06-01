@@ -2,31 +2,36 @@ package com.example.restaurantpicker;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.widget.Toast;
 
-import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
+import com.example.restaurantpicker.Adapter.ItemAdapter;
 import com.example.restaurantpicker.Models.Item;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.ArrayList;
 
-public class RestaurantProducts extends AppCompatActivity {
+public class RestaurantItems extends AppCompatActivity {
 
     String restaurantID;
+    private ArrayList<Item> itemData = new ArrayList<>();
+
+    private RecyclerView recyclerView;
+    private ItemAdapter itemAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_restaurant_products);
+        setContentView(R.layout.activity_restaurant_items);
 
         Bundle bundle = getIntent().getExtras();
 
@@ -34,6 +39,13 @@ public class RestaurantProducts extends AppCompatActivity {
             Toast.makeText(this, "Something went Wrong!", Toast.LENGTH_SHORT).show();
             return;
         }
+
+        recyclerView = findViewById(R.id.item_recycler_view);
+        itemAdapter = new ItemAdapter(itemData, this);
+
+        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
+        recyclerView.setLayoutManager(mLayoutManager);
+        recyclerView.setAdapter(itemAdapter);
 
         restaurantID = bundle.getString(Constants.RESTAURANT_ID);
         getRestaurantProducts(restaurantID);
@@ -69,10 +81,12 @@ public class RestaurantProducts extends AppCompatActivity {
                                     String image = item.getString("image");
 
                                     Item itemModel = new Item(id, name, price, image, restaurantId);
-                                    // restaurantsData.add(restaurantModel);
+                                    itemData.add(itemModel);
                                     //Log.d(Constants.LOGTAG,itemModel.toString());
 
                                 }
+
+
 
                             } else {
                                 Log.d(Constants.LOGTAG, obj.getString("message"));
@@ -82,7 +96,7 @@ public class RestaurantProducts extends AppCompatActivity {
                             Log.d(Constants.LOGTAG, e.getLocalizedMessage());
                         }
 
-                        //restaurantAdapter.notifyDataSetChanged();
+                        itemAdapter.notifyDataSetChanged();
                     }
                 },
                 new Response.ErrorListener() {
