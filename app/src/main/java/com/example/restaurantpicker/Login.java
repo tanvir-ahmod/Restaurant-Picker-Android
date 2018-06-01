@@ -14,6 +14,7 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
+import com.example.restaurantpicker.SharedPreferenceManager.SharedPrefManager;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -31,6 +32,12 @@ public class Login extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         initialize();
+
+        //checking if user already logged in or not
+        if (SharedPrefManager.getInstance(this).isLoggedIn()) {
+            finish();
+            startActivity(new Intent(this, GetAllRestaurants.class));
+        }
 
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override

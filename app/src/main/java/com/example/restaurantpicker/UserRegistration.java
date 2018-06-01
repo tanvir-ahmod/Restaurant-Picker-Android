@@ -1,5 +1,6 @@
 package com.example.restaurantpicker;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -14,6 +15,8 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
+import com.example.restaurantpicker.Models.User;
+import com.example.restaurantpicker.SharedPreferenceManager.SharedPrefManager;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -90,11 +93,26 @@ public class UserRegistration extends AppCompatActivity {
                 try {
                     JSONObject obj = new JSONObject(response);
                     if (!obj.getBoolean("error")) {
+                        JSONObject userJson = obj.getJSONObject("user");
+
+                        //creating user object from json
+                        User user = new User(
+                                userJson.getString("id"),
+                                userJson.getString("name"),
+                                userJson.getString("email")
+                        );
+
+                        //storing the user in shared preferences
+                        SharedPrefManager.getInstance(getApplicationContext()).userLogin(user);
+
+
                         Toast.makeText(getApplicationContext(), obj.getString("message"), Toast.LENGTH_SHORT).show();
-                        Log.d(Constants.LOGTAG, obj.getString("message"));
+                        finish();
+                        startActivity(new Intent(getApplicationContext(), GetAllRestaurants.class));
+
                     } else {
                         Toast.makeText(getApplicationContext(), obj.getString("message"), Toast.LENGTH_SHORT).show();
-                        Log.d(Constants.LOGTAG, obj.getString("message"));
+                        //Log.d(Constants.LOGTAG, obj.getString("message"));
                     }
 
                 } catch (JSONException e) {
@@ -125,7 +143,6 @@ public class UserRegistration extends AppCompatActivity {
 
     private void initialize() {
         register = findViewById(R.id.buttonRegister);
-
         editTextName = findViewById(R.id.editTextName);
         editTextEmail = findViewById(R.id.editTextEmail);
         editTextPassword = findViewById(R.id.editTextPassword);

@@ -12,7 +12,7 @@ public class Constants {
     private static final String BASE_URL = "http://192.168.161.1/Restaurant%20Picker/";
 
     //To get restaurant info
-    public static final String USER_REGISTRATION_URL = "user_registration.php";
+    public static final String USER_REGISTRATION_URL = BASE_URL + "user_registration.php";
     public static final String USER_LOGIN_URL = BASE_URL + "user_login.php";
     public static final String GET_RESTAURANT = BASE_URL + "restaurant_info_api.php";
     public static final String RESTAURANT_IMAGE_URL = BASE_URL;
