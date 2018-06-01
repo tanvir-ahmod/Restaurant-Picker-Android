@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Restaurant Picker</string>
+    <string name="search_hint">search any food items</string>
 </resources>
