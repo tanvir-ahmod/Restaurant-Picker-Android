@@ -110,7 +110,7 @@ public class GetAllRestaurants extends AppCompatActivity {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         //Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_SHORT).show();
-                        Log.d(Constants.LOGTAG, error.getMessage());
+                      //  Log.d(Constants.LOGTAG, error.getMessage());
                     }
                 });
 

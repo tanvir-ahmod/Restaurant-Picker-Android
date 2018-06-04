@@ -57,6 +57,16 @@
                 android:paddingLeft="@dimen/album_title_padding"
                 android:paddingRight="@dimen/album_title_padding"
                 android:text="TextView" />
+
+            <android.support.design.widget.FloatingActionButton
+                android:id="@+id/floatingActionButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_below="@+id/item_name"
+                android:clickable="true"
+                card_view:fabSize="mini"
+                card_view:srcCompat="@android:drawable/checkbox_on_background" />
         </RelativeLayout>
     </android.support.v7.widget.CardView>
 
