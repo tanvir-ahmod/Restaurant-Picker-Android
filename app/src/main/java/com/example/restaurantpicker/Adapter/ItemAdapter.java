@@ -1,7 +1,9 @@
 package com.example.restaurantpicker.Adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,9 +12,12 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.example.restaurantpicker.ConfirmOrder;
 import com.example.restaurantpicker.Constants;
 import com.example.restaurantpicker.Models.Item;
+import com.example.restaurantpicker.Models.User;
 import com.example.restaurantpicker.R;
+import com.example.restaurantpicker.SharedPreferenceManager.SharedPrefManager;
 
 import java.util.List;
 
@@ -47,7 +52,7 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ItemAdapter.ItemViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull ItemAdapter.ItemViewHolder holder, final int position) {
 
         holder.itemName.setText(itemList.get(position).getName());
         holder.itemPrice.setText(itemList.get(position).getPrice());
@@ -61,6 +66,18 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
         } else
             holder.restaurantName.setVisibility(View.GONE);
 
+        holder.submitOrder.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent intent = new Intent(context, ConfirmOrder.class);
+                intent.putExtra(Constants.ITEM_ID, itemList.get(position).getId());
+                intent.putExtra(Constants.RESTAURANT_NAME, itemList.get(position).getRestaurantName());
+                intent.putExtra(Constants.ITEM_NAME, itemList.get(position).getName());
+                context.startActivity(intent);
+            }
+        });
+
     }
 
     @Override
@@ -73,6 +90,7 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
         public TextView itemName;
         public TextView itemPrice;
         public ImageView itemImage;
+        public FloatingActionButton submitOrder;
 
         public ItemViewHolder(View view) {
             super(view);
@@ -80,6 +98,7 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
             itemPrice = view.findViewById(R.id.item_price);
             itemImage = view.findViewById(R.id.item_image);
             restaurantName = view.findViewById(R.id.restaurant_name);
+            submitOrder = view.findViewById(R.id.submit_order_fab);
         }
     }
 }

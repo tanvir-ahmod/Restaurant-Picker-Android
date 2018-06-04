@@ -1,4 +1,13 @@
 <resources>
     <string name="app_name">Restaurant Picker</string>
     <string name="search_hint">search any food items</string>
+
+    <!-- Confirm Order -->
+    <string name="item_name">Item Name</string>
+    <string name="restaurant_name">Restaurant Name</string>
+    <string name="phone">Phone</string>
+    <string name="location">Location</string>
+
+
+
 </resources>
