@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -14,6 +15,7 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
+import com.example.restaurantpicker.Models.User;
 import com.example.restaurantpicker.SharedPreferenceManager.SharedPrefManager;
 
 import org.json.JSONException;
@@ -33,7 +35,6 @@ public class Login extends AppCompatActivity {
         setContentView(R.layout.activity_login);
         initialize();
 
-        //checking if user already logged in or not
         if (SharedPrefManager.getInstance(this).isLoggedIn()) {
             finish();
             startActivity(new Intent(this, GetAllRestaurants.class));
@@ -83,9 +84,13 @@ public class Login extends AppCompatActivity {
                             //converting response to json object
                             JSONObject obj = new JSONObject(response);
 
-                            //if no error in response
                             if (!obj.getBoolean("error")) {
                                 Toast.makeText(getApplicationContext(), obj.getString("message"), Toast.LENGTH_SHORT).show();
+
+                                JSONObject userJson = obj.getJSONObject("user");
+                                saveUserInformation(userJson);
+                                divertToNextActivity();
+
                             } else {
                                 Toast.makeText(getApplicationContext(), obj.getString("message"), Toast.LENGTH_SHORT).show();
                             }
@@ -113,9 +118,29 @@ public class Login extends AppCompatActivity {
     }
 
 
+    private void saveUserInformation(JSONObject userJson) throws JSONException {
+        User user = new User(
+                userJson.getString("id"),
+                userJson.getString("name"),
+                userJson.getString("email"),
+                userJson.getString("phone")
+        );
+
+        Log.d(Constants.LOGTAG, "userPhone : " + user.getPhone());
+
+        //storing the user in shared preferences
+        SharedPrefManager.getInstance(getApplicationContext()).userLogin(user);
+    }
+
+    private void divertToNextActivity() {
+        finish();
+        startActivity(new Intent(getApplicationContext(), GetAllRestaurants.class));
+
+    }
+
     private void initialize() {
         loginButton = findViewById(R.id.buttonLogin);
-        editTextEmail = findViewById(R.id.editTextUsername);
+        editTextEmail = findViewById(R.id.editTextUserEmail);
         editTextPassword = findViewById(R.id.editTextPassword);
     }
 }

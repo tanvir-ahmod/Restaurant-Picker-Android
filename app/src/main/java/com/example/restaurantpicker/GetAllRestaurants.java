@@ -7,6 +7,8 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -18,6 +20,7 @@ import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.StringRequest;
 import com.example.restaurantpicker.Adapter.RestaurantAdapter;
 import com.example.restaurantpicker.Models.Restaurant;
+import com.example.restaurantpicker.SharedPreferenceManager.SharedPrefManager;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -109,12 +112,32 @@ public class GetAllRestaurants extends AppCompatActivity {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        //Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_SHORT).show();
-                      //  Log.d(Constants.LOGTAG, error.getMessage());
+                       Log.d(Constants.LOGTAG, "VolleyError : " +error.getMessage());
                     }
                 });
 
         AppSingleton.getInstance(getApplicationContext()).addToRequestQueue(stringRequest, Constants.REQUEST_TAG);
 
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+
+        getMenuInflater().inflate(R.menu.menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        int id = item.getItemId();
+
+        if (id == R.id.logout) {
+            SharedPrefManager.getInstance(this).logout();
+            finish();
+            startActivity(new Intent(this, Login.class));
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 }

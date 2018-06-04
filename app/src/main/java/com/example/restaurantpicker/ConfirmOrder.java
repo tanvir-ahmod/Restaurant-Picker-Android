@@ -3,6 +3,7 @@ package com.example.restaurantpicker;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -88,6 +89,9 @@ public class ConfirmOrder extends AppCompatActivity {
 
             User user = SharedPrefManager.getInstance(this).getUser();
             phoneEditText.setText(user.getPhone());
+
+            Log.d(Constants.LOGTAG, user.getName());
+//            Log.d(Constants.LOGTAG, user.getPhone());
 
         }
 
