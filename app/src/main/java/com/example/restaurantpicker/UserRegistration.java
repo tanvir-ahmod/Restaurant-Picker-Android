@@ -99,7 +99,8 @@ public class UserRegistration extends AppCompatActivity {
                         User user = new User(
                                 userJson.getString("id"),
                                 userJson.getString("name"),
-                                userJson.getString("email")
+                                userJson.getString("email"),
+                                userJson.getString("phone")
                         );
 
                         //storing the user in shared preferences
