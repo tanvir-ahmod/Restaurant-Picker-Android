@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.NumberPicker;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -30,8 +31,8 @@ public class ConfirmOrder extends AppCompatActivity {
     TextView itemNameTextView;
     EditText phoneEditText;
     EditText locationEditText;
-
     Button confirmButton;
+    NumberPicker amountPicker;
 
     String restaurantName;
     String itemID;
@@ -53,8 +54,6 @@ public class ConfirmOrder extends AppCompatActivity {
                 if (!isValid) {
                     return;
                 }
-
-
                 submitOrder();
 
             }
@@ -65,18 +64,10 @@ public class ConfirmOrder extends AppCompatActivity {
     private void submitOrder() {
 
         final User user = SharedPrefManager.getInstance(this).getUser();
-
         final String userID = user.getId();
         final String tempPhone = phoneEditText.getText().toString().trim();
         final String tempLocation = locationEditText.getText().toString().trim();
-
-
-        /*Log.d(Constants.LOGTAG, itemID);
-        Log.d(Constants.LOGTAG, userID);
-        Log.d(Constants.LOGTAG, restaurantID);
-        Log.d(Constants.LOGTAG, tempPhone);
-        Log.d(Constants.LOGTAG, tempLocation);*/
-
+        final String itemAmount = String.valueOf(amountPicker.getValue());
 
         StringRequest stringRequest = new StringRequest(Request.Method.POST, Constants.SUBMIT_ORDER_URL, new Response.Listener<String>() {
             @Override
@@ -85,12 +76,10 @@ public class ConfirmOrder extends AppCompatActivity {
                 try {
                     JSONObject obj = new JSONObject(response);
                     if (!obj.getBoolean("error")) {
-
                         Toast.makeText(getApplicationContext(), obj.getString("message"), Toast.LENGTH_SHORT).show();
 
                     } else {
                         Toast.makeText(getApplicationContext(), obj.getString("message"), Toast.LENGTH_SHORT).show();
-                        //Log.d(Constants.LOGTAG, obj.getString("message"));
                     }
 
                 } catch (JSONException e) {
@@ -111,6 +100,7 @@ public class ConfirmOrder extends AppCompatActivity {
                 params.put("item_id", itemID);
                 params.put("user_id", userID);
                 params.put("company_id", restaurantID);
+                params.put("amount", itemAmount);
                 params.put("phone", tempPhone);
                 params.put("location", tempLocation);
                 return params;
@@ -146,6 +136,10 @@ public class ConfirmOrder extends AppCompatActivity {
         phoneEditText = findViewById(R.id.phone_edit_text);
         locationEditText = findViewById(R.id.location_edit_text);
         confirmButton = findViewById(R.id.confirm_button);
+        amountPicker = findViewById(R.id.amount_picker);
+
+        amountPicker.setMaxValue(10);
+        amountPicker.setMinValue(1);
 
         Bundle bundle = getIntent().getExtras();
 
