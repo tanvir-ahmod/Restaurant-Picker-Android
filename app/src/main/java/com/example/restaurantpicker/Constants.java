@@ -9,7 +9,7 @@ public class Constants {
     public static final String REQUEST_TAG = "com.example.restaurantpicker";
     public static final String LOGTAG = "logtag";
 
-    public static String SERVER = "http://192.168.0.102/";
+    public static String SERVER = "http://192.168.0.105/";
 
     private static final String BASE_URL = SERVER + "Restaurant%20Picker/";
 
@@ -30,8 +30,9 @@ public class Constants {
 
     //order item
     public static final String ITEM_ID = "itemid";
-    public static final String RESTAURANT_NAME = "itemid";
+    public static final String RESTAURANT_NAME = "restaurantname";
     public static final String ITEM_NAME = "itemname";
+    public static final String SUBMIT_ORDER_URL = BASE_URL + "/submit_order_api.php";
 
 
 }

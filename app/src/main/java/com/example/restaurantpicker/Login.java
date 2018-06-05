@@ -52,28 +52,11 @@ public class Login extends AppCompatActivity {
     }
 
     private void userLogin() {
-        //first getting the values
+        boolean isValidated = validateData();
+        if (!isValidated)
+            return;
         final String tempEmail = editTextEmail.getText().toString();
         final String password = editTextPassword.getText().toString();
-
-        //validating inputs
-        if (TextUtils.isEmpty(tempEmail)) {
-            editTextEmail.setError("Please enter your email");
-            editTextEmail.requestFocus();
-            return;
-        }
-
-        if (!android.util.Patterns.EMAIL_ADDRESS.matcher(tempEmail).matches()) {
-            editTextEmail.setError("Enter a valid email");
-            editTextEmail.requestFocus();
-            return;
-        }
-
-        if (TextUtils.isEmpty(password)) {
-            editTextPassword.setError("Please enter your password");
-            editTextPassword.requestFocus();
-            return;
-        }
 
         //if everything is fine
         StringRequest stringRequest = new StringRequest(Request.Method.POST, Constants.USER_LOGIN_URL,
@@ -117,6 +100,32 @@ public class Login extends AppCompatActivity {
         AppSingleton.getInstance(getApplicationContext()).addToRequestQueue(stringRequest, Constants.REQUEST_TAG);
     }
 
+    private boolean validateData() {
+        final String tempEmail = editTextEmail.getText().toString();
+        final String password = editTextPassword.getText().toString();
+
+        //validating inputs
+        if (TextUtils.isEmpty(tempEmail)) {
+            editTextEmail.setError("Please enter your email");
+            editTextEmail.requestFocus();
+            return false;
+        }
+
+        if (!android.util.Patterns.EMAIL_ADDRESS.matcher(tempEmail).matches()) {
+            editTextEmail.setError("Enter a valid email");
+            editTextEmail.requestFocus();
+            return false;
+        }
+
+        if (TextUtils.isEmpty(password)) {
+            editTextPassword.setError("Please enter your password");
+            editTextPassword.requestFocus();
+            return false;
+        }
+
+        return true;
+    }
+
 
     private void saveUserInformation(JSONObject userJson) throws JSONException {
         User user = new User(
@@ -125,8 +134,6 @@ public class Login extends AppCompatActivity {
                 userJson.getString("email"),
                 userJson.getString("phone")
         );
-
-        Log.d(Constants.LOGTAG, "userPhone : " + user.getPhone());
 
         //storing the user in shared preferences
         SharedPrefManager.getInstance(getApplicationContext()).userLogin(user);

@@ -39,78 +39,35 @@ public class UserRegistration extends AppCompatActivity {
         register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 registerUser();
-
             }
         });
     }
 
     private void registerUser() {
+        boolean isValidated = validateData();
+        if (!isValidated) {
+            return;
+        }
+
         final String tempName = editTextName.getText().toString().trim();
         final String tempEmail = editTextEmail.getText().toString().trim();
         final String tempPassword = editTextPassword.getText().toString().trim();
         final String tempPhone = editTextPhone.getText().toString().trim();
 
-        //data validation
-        if (TextUtils.isEmpty(tempName)) {
-            editTextName.setError("Please enter name");
-            editTextName.requestFocus();
-            return;
-        }
-
-        if (TextUtils.isEmpty(tempEmail)) {
-            editTextEmail.setError("Please enter your email");
-            editTextEmail.requestFocus();
-            return;
-        }
-
-        if (!android.util.Patterns.EMAIL_ADDRESS.matcher(tempEmail).matches()) {
-            editTextEmail.setError("Enter a valid email");
-            editTextEmail.requestFocus();
-            return;
-        }
-
-        if (TextUtils.isEmpty(tempPassword)) {
-            editTextPassword.setError("Enter a password");
-            editTextPassword.requestFocus();
-            return;
-        }
-
-        if (TextUtils.isEmpty(tempPhone)) {
-            editTextPhone.setError("Enter a phone number");
-            editTextPhone.requestFocus();
-            return;
-        }
-
-
         StringRequest stringRequest = new StringRequest(Request.Method.POST, Constants.USER_REGISTRATION_URL, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                //Toast.makeText(getApplicationContext(), response, Toast.LENGTH_SHORT).show();
-                Log.d(Constants.LOGTAG, "on response");
 
                 try {
                     JSONObject obj = new JSONObject(response);
                     if (!obj.getBoolean("error")) {
-                        JSONObject userJson = obj.getJSONObject("user");
-
-                        //creating user object from json
-                        User user = new User(
-                                userJson.getString("id"),
-                                userJson.getString("name"),
-                                userJson.getString("email"),
-                                userJson.getString("phone")
-                        );
-
-                        //storing the user in shared preferences
-                        SharedPrefManager.getInstance(getApplicationContext()).userLogin(user);
-
 
                         Toast.makeText(getApplicationContext(), obj.getString("message"), Toast.LENGTH_SHORT).show();
-                        finish();
-                        startActivity(new Intent(getApplicationContext(), GetAllRestaurants.class));
+                        JSONObject userJson = obj.getJSONObject("user");
 
+                        saveUserInformation(userJson);
+                        divertToNextActivity();
                     } else {
                         Toast.makeText(getApplicationContext(), obj.getString("message"), Toast.LENGTH_SHORT).show();
                         //Log.d(Constants.LOGTAG, obj.getString("message"));
@@ -140,6 +97,58 @@ public class UserRegistration extends AppCompatActivity {
         };
 
         AppSingleton.getInstance(getApplicationContext()).addToRequestQueue(stringRequest, Constants.REQUEST_TAG);
+    }
+
+    private boolean validateData() {
+        String tempName = editTextName.getText().toString().trim();
+        String tempEmail = editTextEmail.getText().toString().trim();
+        String tempPassword = editTextPassword.getText().toString().trim();
+        String tempPhone = editTextPhone.getText().toString().trim();
+
+        if (TextUtils.isEmpty(tempName)) {
+            editTextName.setError("Please enter name");
+            editTextName.requestFocus();
+            return false;
+        }
+        if (TextUtils.isEmpty(tempEmail)) {
+            editTextEmail.setError("Please enter your email");
+            editTextEmail.requestFocus();
+            return false;
+        }
+        if (!android.util.Patterns.EMAIL_ADDRESS.matcher(tempEmail).matches()) {
+            editTextEmail.setError("Enter a valid email");
+            editTextEmail.requestFocus();
+            return false;
+        }
+        if (TextUtils.isEmpty(tempPassword)) {
+            editTextPassword.setError("Enter a password");
+            editTextPassword.requestFocus();
+            return false;
+        }
+        if (TextUtils.isEmpty(tempPhone)) {
+            editTextPhone.setError("Enter a phone number");
+            editTextPhone.requestFocus();
+            return false;
+        }
+        return true;
+    }
+
+    private void saveUserInformation(JSONObject userJson) throws JSONException {
+        User user = new User(
+                userJson.getString("id"),
+                userJson.getString("name"),
+                userJson.getString("email"),
+                userJson.getString("phone")
+        );
+
+        //storing the user in shared preferences
+        SharedPrefManager.getInstance(getApplicationContext()).userLogin(user);
+    }
+
+    private void divertToNextActivity() {
+        finish();
+        startActivity(new Intent(getApplicationContext(), GetAllRestaurants.class));
+
     }
 
     private void initialize() {
