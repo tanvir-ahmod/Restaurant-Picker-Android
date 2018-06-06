@@ -32,7 +32,10 @@ public class Constants {
     public static final String ITEM_ID = "itemid";
     public static final String RESTAURANT_NAME = "restaurantname";
     public static final String ITEM_NAME = "itemname";
-    public static final String SUBMIT_ORDER_URL = BASE_URL + "/submit_order_api.php";
+    public static final String SUBMIT_ORDER_URL = BASE_URL + "submit_order_api.php";
+
+    // Update profile
+    public static final String UPDATE_PROFILE_URL = BASE_URL + "update_user_info_api.php";
 
 
 }
