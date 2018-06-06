@@ -51,21 +51,17 @@ public class UpdateProfile extends AppCompatActivity {
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-
                         try {
-                            //converting response to json object
                             JSONObject obj = new JSONObject(response);
-
                             //if no error in response
                             if (!obj.getBoolean("error")) {
-                                Log.d(Constants.LOGTAG, obj.getString("message"));
-
+                                JSONObject userJson = obj.getJSONObject("user");
+                                saveUserInformation(userJson);
                             } else {
                                 Log.d(Constants.LOGTAG, obj.getString("message"));
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();
-                            Log.d(Constants.LOGTAG, e.getLocalizedMessage());
                         }
                     }
                 },
@@ -85,6 +81,17 @@ public class UpdateProfile extends AppCompatActivity {
         AppSingleton.getInstance(getApplicationContext()).
                 addToRequestQueue(stringRequest, Constants.REQUEST_TAG);
 
+    }
+
+    private void saveUserInformation(JSONObject userJson) throws JSONException {
+        User user = new User(
+                userJson.getString("id"),
+                userJson.getString("name"),
+                userJson.getString("email"),
+                userJson.getString("phone")
+        );
+        SharedPrefManager.getInstance(getApplicationContext()).logout();
+        SharedPrefManager.getInstance(getApplicationContext()).userLogin(user);
     }
 
     private Map<String, String> getValidPostParameters() {
