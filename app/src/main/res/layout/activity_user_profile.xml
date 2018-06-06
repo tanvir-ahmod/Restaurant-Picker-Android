@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.example.restaurantpicker.UserProfile">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp">
+
+        <ImageView
+            android:id="@+id/user_image"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/default_user" />
+
+        <LinearLayout
+            android:layout_margin="@dimen/linearlayouts"
+            android:id="@+id/name_linearlayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/user_image"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Name : " />
+
+            <TextView
+                android:id="@+id/user_name_textview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="AAAAAAA" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_margin="@dimen/linearlayouts"
+            android:id="@+id/email_linearlayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/name_linearlayout"
+            android:layout_toRightOf="@+id/user_image"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="email : " />
+
+            <TextView
+                android:id="@+id/user_email_textview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="aaa@aaaaa.com" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_margin="@dimen/linearlayouts"
+            android:id="@+id/phone_linearlayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/email_linearlayout"
+            android:layout_toRightOf="@+id/user_image"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Phone : " />
+
+            <TextView
+                android:id="@+id/user_phone_textview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="017777777777" />
+        </LinearLayout>
+
+        <Button
+            android:layout_margin="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/phone_linearlayout"
+            android:layout_toRightOf="@+id/user_image"
+            android:text="Update" />
+
+    </RelativeLayout>
+
+</LinearLayout>

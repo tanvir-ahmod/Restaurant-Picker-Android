@@ -24,4 +24,7 @@
     <dimen name="restaurant_image_height">120dp</dimen>
     <dimen name="restaurant_image_width">100dp</dimen>
     <dimen name="restaurant_relative_margin">5dp</dimen>
+
+    <!-- User profile -->
+    <dimen name="linearlayouts">10dp</dimen>
 </resources>
