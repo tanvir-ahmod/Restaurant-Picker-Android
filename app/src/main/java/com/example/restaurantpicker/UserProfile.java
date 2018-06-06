@@ -5,14 +5,24 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
 import com.example.restaurantpicker.Adapter.OrderHistoryAdapter;
 import com.example.restaurantpicker.Models.OrderHistory;
+import com.example.restaurantpicker.Models.Restaurant;
 import com.example.restaurantpicker.Models.User;
 import com.example.restaurantpicker.SharedPreferenceManager.SharedPrefManager;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,7 +44,7 @@ public class UserProfile extends AppCompatActivity {
         initializeViews();
         initializeAdapters();
         makeVisibleUserInfo();
-        insertDummyData();
+        getHistoryFromServer();
 
         updateButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -44,24 +54,45 @@ public class UserProfile extends AppCompatActivity {
         });
     }
 
-    private void insertDummyData() {
-        OrderHistory orderHistory = new OrderHistory();
-        orderHistory.setRestaurnatName("aaaaaaaaa");
-        orderHistory.setItemName("bbbbbbb");
-        orderHistory.setAmount("1");
-        orderHistory.setPrice("10");
-        orderHistory.setTimestamp("100");
-        orderHistoryList.add(orderHistory);
+    private void getHistoryFromServer() {
+        String userID = SharedPrefManager.getInstance(this).getUser().getId();
+        String URL = Constants.ORDER_HISTORY_URL + "?id=" + userID;
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, URL,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        try {
+                            JSONObject obj = new JSONObject(response);
+                            //if no error in response
+                            if (!obj.getBoolean("error")) {
+                                JSONArray histories = obj.getJSONArray("history");
 
-        orderHistory = new OrderHistory();
-        orderHistory.setRestaurnatName("cccccc");
-        orderHistory.setItemName("ddddd");
-        orderHistory.setAmount("2");
-        orderHistory.setPrice("20");
-        orderHistory.setTimestamp("300");
-        orderHistoryList.add(orderHistory);
-
-        orderHistoryAdapter.notifyDataSetChanged();
+                                for (int i = 0; i < histories.length(); i++) {
+                                    JSONObject history = histories.getJSONObject(i);
+                                    OrderHistory orderHistory = new OrderHistory();
+                                    orderHistory.setRestaurnatName(history.getString("restaurant_name"));
+                                    orderHistory.setItemName(history.getString("item_name"));
+                                    orderHistory.setPrice(history.getString("price"));
+                                    orderHistory.setTimestamp(history.getString("order_time"));
+                                    orderHistoryList.add(orderHistory);
+                                }
+                            } else {
+                                Log.d(Constants.LOGTAG, obj.getString("message"));
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                        orderHistoryAdapter.notifyDataSetChanged();
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Log.d(Constants.LOGTAG, "VolleyError : " + error.getMessage());
+                    }
+                });
+        AppSingleton.getInstance(getApplicationContext())
+                .addToRequestQueue(stringRequest, Constants.REQUEST_TAG);
     }
 
     private void initializeAdapters() {

@@ -9,7 +9,7 @@ public class Constants {
     public static final String REQUEST_TAG = "com.example.restaurantpicker";
     public static final String LOGTAG = "logtag";
 
-    public static String SERVER = "http://192.168.0.105/";
+    public static String SERVER = "http://192.168.0.102/";
 
     private static final String BASE_URL = SERVER + "Restaurant%20Picker/";
 
@@ -36,6 +36,9 @@ public class Constants {
 
     // Update profile
     public static final String UPDATE_PROFILE_URL = BASE_URL + "update_user_info_api.php";
+
+    // Order history
+    public static final String ORDER_HISTORY_URL = BASE_URL + "user_order_history_api.php";
 
 
 }
