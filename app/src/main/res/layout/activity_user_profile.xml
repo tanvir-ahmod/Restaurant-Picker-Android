@@ -20,10 +20,10 @@
             android:src="@drawable/default_user" />
 
         <LinearLayout
-            android:layout_margin="@dimen/linearlayouts"
             android:id="@+id/name_linearlayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_margin="@dimen/linearlayouts"
             android:layout_toRightOf="@+id/user_image"
             android:orientation="horizontal">
 
@@ -40,11 +40,11 @@
         </LinearLayout>
 
         <LinearLayout
-            android:layout_margin="@dimen/linearlayouts"
             android:id="@+id/email_linearlayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/name_linearlayout"
+            android:layout_margin="@dimen/linearlayouts"
             android:layout_toRightOf="@+id/user_image"
             android:orientation="horizontal">
 
@@ -61,11 +61,11 @@
         </LinearLayout>
 
         <LinearLayout
-            android:layout_margin="@dimen/linearlayouts"
             android:id="@+id/phone_linearlayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/email_linearlayout"
+            android:layout_margin="@dimen/linearlayouts"
             android:layout_toRightOf="@+id/user_image"
             android:orientation="horizontal">
 
@@ -83,13 +83,18 @@
 
         <Button
             android:id="@+id/update_button"
-            android:layout_margin="10dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/phone_linearlayout"
+            android:layout_margin="10dp"
             android:layout_toRightOf="@+id/user_image"
             android:text="Update" />
 
     </RelativeLayout>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/order_history_recyclerview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
 
 </LinearLayout>

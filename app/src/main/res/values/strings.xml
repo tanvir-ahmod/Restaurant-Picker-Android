@@ -9,5 +9,8 @@
     <string name="location">Location</string>
     <string name="amount">Amount</string>
 
+    <!-- Order History-->
+    <string name="price">Price</string>
+    <string name="order_time">Order Time</string>
 
 </resources>
