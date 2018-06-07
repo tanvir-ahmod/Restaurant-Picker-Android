@@ -3,6 +3,7 @@ package com.example.restaurantpicker.Adapter;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,7 +23,6 @@ import java.util.List;
  * Created by Shoukhin on 5/30/2018.
  */
 public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.RestaurantViewHolder> {
-
     private List<Restaurant> restaurantList;
     private Context context;
 
@@ -42,7 +42,7 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Re
     public void onBindViewHolder(RestaurantViewHolder holder, final int position) {
         holder.restaurantName.setText(restaurantList.get(position).getName());
         holder.restaurantPhone.setText(restaurantList.get(position).getPhone());
-        final String imageUrl = Constants.RESTAURANT_IMAGE_URL + restaurantList
+        final String imageUrl = Constants.SERVER + restaurantList
                 .get(position).getImage();
         Glide.with(context).load(imageUrl).into(holder.restaurantImage);
 

@@ -8,14 +8,12 @@ import com.example.restaurantpicker.Login;
 import com.example.restaurantpicker.Models.User;
 
 public class SharedPrefManager {
-
-    //the constants
     private static final String SHARED_PREF_NAME = "restaurantpicker";
     private static final String KEY_NAME = "keyname";
     private static final String KEY_EMAIL = "keyemail";
     private static final String KEY_ID = "keyid";
     private static final String KEY_PHONE = "keyphone";
-
+    private static final String SERVER_URL = "serverurl";
     private static SharedPrefManager mInstance;
     private Context mCtx;
 
@@ -66,5 +64,17 @@ public class SharedPrefManager {
         editor.clear();
         editor.apply();
         mCtx.startActivity(new Intent(mCtx, Login.class));
+    }
+
+    public void saveSrverURL(String URL) {
+        SharedPreferences sharedPreferences = mCtx.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString(SERVER_URL, URL);
+        editor.apply();
+    }
+
+    public String getServerUrl() {
+        SharedPreferences sharedPreferences = mCtx.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
+        return sharedPreferences.getString(SERVER_URL, null);
     }
 }

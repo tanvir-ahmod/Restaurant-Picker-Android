@@ -67,7 +67,7 @@ public class RestaurantItems extends AppCompatActivity {
     }
 
     private void getRestaurantProducts(final String restaurantId) {
-        String url = Constants.RESTAURANT_ITEM_URL + "?id=" + restaurantId;
+        String url = Constants.SERVER + Constants.RESTAURANT_ITEM_URL + "?id=" + restaurantId;
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {
                     @Override

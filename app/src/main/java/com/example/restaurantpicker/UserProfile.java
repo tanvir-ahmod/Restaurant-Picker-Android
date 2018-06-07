@@ -43,7 +43,6 @@ public class UserProfile extends AppCompatActivity {
         initializeAdapters();
         makeVisibleUserInfo();
         getHistoryFromServer();
-
         updateButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -54,7 +53,7 @@ public class UserProfile extends AppCompatActivity {
 
     private void getHistoryFromServer() {
         String userID = SharedPrefManager.getInstance(this).getUser().getId();
-        String URL = Constants.ORDER_HISTORY_URL + "?id=" + userID;
+        String URL = Constants.SERVER + Constants.ORDER_HISTORY_URL + "?id=" + userID;
         StringRequest stringRequest = new StringRequest(Request.Method.GET, URL,
                 new Response.Listener<String>() {
                     @Override

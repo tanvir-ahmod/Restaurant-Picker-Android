@@ -59,8 +59,9 @@ public class GetAllRestaurants extends AppCompatActivity {
     }
 
     private void getAllRestaurants() {
+        String URL = Constants.SERVER + Constants.GET_RESTAURANT_URL;
         StringRequest stringRequest = new StringRequest(Request.Method.GET,
-                Constants.GET_RESTAURANT,
+                URL,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {

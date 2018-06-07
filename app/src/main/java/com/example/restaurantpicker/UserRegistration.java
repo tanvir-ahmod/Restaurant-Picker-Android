@@ -50,8 +50,9 @@ public class UserRegistration extends AppCompatActivity {
         final String tempEmail = editTextEmail.getText().toString().trim();
         final String tempPassword = editTextPassword.getText().toString().trim();
         final String tempPhone = editTextPhone.getText().toString().trim();
+        String URL = Constants.SERVER + Constants.USER_REGISTRATION_URL;
         StringRequest stringRequest = new StringRequest(Request.Method.POST,
-                Constants.USER_REGISTRATION_URL, new Response.Listener<String>() {
+                URL, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 try {

@@ -44,8 +44,9 @@ public class UpdateProfile extends AppCompatActivity {
     }
 
     private void sendRequestToServer() {
+        String URL = Constants.SERVER + Constants.UPDATE_PROFILE_URL;
         StringRequest stringRequest = new StringRequest(Request.Method.POST,
-                Constants.UPDATE_PROFILE_URL,
+                URL,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {

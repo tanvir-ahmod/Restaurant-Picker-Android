@@ -60,7 +60,9 @@ public class ConfirmOrder extends AppCompatActivity {
         final String tempPhone = phoneEditText.getText().toString().trim();
         final String tempLocation = locationEditText.getText().toString().trim();
         final String itemAmount = String.valueOf(amountPicker.getValue());
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, Constants.SUBMIT_ORDER_URL, new Response.Listener<String>() {
+        String URL = Constants.SERVER + Constants.SUBMIT_ORDER_URL;
+        StringRequest stringRequest = new StringRequest(Request.Method.POST,
+                URL, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 try {

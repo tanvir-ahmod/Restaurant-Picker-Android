@@ -50,8 +50,9 @@ public class Login extends AppCompatActivity {
             return;
         final String tempEmail = editTextEmail.getText().toString();
         final String password = editTextPassword.getText().toString();
-        //if everything is fine
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, Constants.USER_LOGIN_URL,
+        String URL = Constants.SERVER + Constants.USER_LOGIN_URL;
+        StringRequest stringRequest = new StringRequest(Request.Method.POST,
+                URL,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
@@ -81,7 +82,7 @@ public class Login extends AppCompatActivity {
                         Toast.makeText(getApplicationContext(),
                                 error.getMessage(), Toast.LENGTH_SHORT).show();
                     }
-                }){
+                }) {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> params = new HashMap<>();

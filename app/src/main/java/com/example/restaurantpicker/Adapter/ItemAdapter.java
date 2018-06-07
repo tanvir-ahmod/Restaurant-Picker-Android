@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -51,9 +52,8 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
     public void onBindViewHolder(@NonNull ItemAdapter.ItemViewHolder holder, final int position) {
         holder.itemName.setText(itemList.get(position).getName());
         holder.itemPrice.setText(itemList.get(position).getPrice());
-        String imageURL = Constants.ITEM_IMAGE_URL + itemList.get(position).getImageURL();
+        String imageURL = Constants.SERVER + itemList.get(position).getImageURL();
         Glide.with(context).load(imageURL).into(holder.itemImage);
-
         if (visibleRestaurantName) {
             holder.restaurantName.setVisibility(View.VISIBLE);
             holder.restaurantName.setText(itemList.get(position).getRestaurantName());

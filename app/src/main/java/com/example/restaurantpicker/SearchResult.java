@@ -5,12 +5,14 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.example.restaurantpicker.Adapter.ItemAdapter;
 import com.example.restaurantpicker.Models.Item;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -41,7 +43,7 @@ public class SearchResult extends AppCompatActivity {
     }
 
     private void getSearchedItems(final String searchKey) {
-        String url = Constants.SEARCH_ITEM_URL + "?search_key=" + searchKey;
+        String url = Constants.SERVER + Constants.SEARCH_ITEM_URL + "?search_key=" + searchKey;
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {
                     @Override
