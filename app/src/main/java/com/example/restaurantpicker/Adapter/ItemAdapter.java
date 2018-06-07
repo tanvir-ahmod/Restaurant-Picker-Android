@@ -26,17 +26,14 @@ import java.util.List;
  */
 
 public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder> {
-
     private List<Item> itemList;
     private Context context;
     private boolean visibleRestaurantName = false;
-
 
     public ItemAdapter(List<Item> itemList, Context context) {
         this.itemList = itemList;
         this.context = context;
     }
-
     //Used to visible / invisible restaurant name in recycler view
     public void setVisibleRestaurantName(boolean visibleRestaurantName) {
         this.visibleRestaurantName = visibleRestaurantName;
@@ -47,16 +44,13 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
     public ItemAdapter.ItemViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.item_list_view, parent, false);
-
         return new ItemViewHolder(itemView);
     }
 
     @Override
     public void onBindViewHolder(@NonNull ItemAdapter.ItemViewHolder holder, final int position) {
-
         holder.itemName.setText(itemList.get(position).getName());
         holder.itemPrice.setText(itemList.get(position).getPrice());
-
         String imageURL = Constants.ITEM_IMAGE_URL + itemList.get(position).getImageURL();
         Glide.with(context).load(imageURL).into(holder.itemImage);
 
@@ -69,7 +63,6 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
         holder.submitOrder.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 Intent intent = new Intent(context, ConfirmOrder.class);
                 intent.putExtra(Constants.ITEM_ID, itemList.get(position).getId());
                 intent.putExtra(Constants.RESTAURANT_NAME, itemList.get(position).getRestaurantName());

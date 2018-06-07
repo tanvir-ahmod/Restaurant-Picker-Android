@@ -35,7 +35,6 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Re
     public RestaurantViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.all_restaurant_list_view, parent, false);
-
         return new RestaurantViewHolder(itemView);
     }
 
@@ -43,8 +42,8 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Re
     public void onBindViewHolder(RestaurantViewHolder holder, final int position) {
         holder.restaurantName.setText(restaurantList.get(position).getName());
         holder.restaurantPhone.setText(restaurantList.get(position).getPhone());
-
-        final String imageUrl = Constants.RESTAURANT_IMAGE_URL + restaurantList.get(position).getImage();
+        final String imageUrl = Constants.RESTAURANT_IMAGE_URL + restaurantList
+                .get(position).getImage();
         Glide.with(context).load(imageUrl).into(holder.restaurantImage);
 
         holder.relativeLayout.setOnClickListener(new View.OnClickListener() {
@@ -58,7 +57,6 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Re
                 context.startActivity(intent);
             }
         });
-
     }
 
     @Override

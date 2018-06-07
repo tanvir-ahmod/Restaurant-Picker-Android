@@ -2,8 +2,20 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
+        android:id="@+id/profile"
+        android:icon="@drawable/default_user"
+        android:orderInCategory="100"
+        android:title="Profile"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/setting"
+        android:icon="@drawable/settings_icon"
+        android:orderInCategory="100"
+        android:title="Setting"
+        app:showAsAction="ifRoom" />
+    <item
         android:id="@+id/logout"
         android:orderInCategory="100"
         android:title="Logout"
-        app:showAsAction="ifRoom" />
+        app:showAsAction="never" />
 </menu>

@@ -1,9 +1,8 @@
 package com.example.restaurantpicker;
 
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -16,7 +15,6 @@ import android.widget.EditText;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.StringRequest;
 import com.example.restaurantpicker.Adapter.RestaurantAdapter;
 import com.example.restaurantpicker.Models.Restaurant;
@@ -40,15 +38,14 @@ public class GetAllRestaurants extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_get_all_restaurants);
+        editTextSearch = findViewById(R.id.search_edit_text);
+        searchButton = findViewById(R.id.search_button);
         recyclerView = findViewById(R.id.all_restaurant_recyclerview);
         restaurantAdapter = new RestaurantAdapter(restaurantsData, this);
-
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setAdapter(restaurantAdapter);
         getAllRestaurants();
-        editTextSearch = findViewById(R.id.search_edit_text);
-        searchButton = findViewById(R.id.search_button);
 
         searchButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -111,7 +108,9 @@ public class GetAllRestaurants extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
-
+        if (id == R.id.profile) {
+            startActivity(new Intent(this, UserProfile.class));
+        }
         if (id == R.id.logout) {
             SharedPrefManager.getInstance(this).logout();
             finish();

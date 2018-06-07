@@ -26,14 +26,12 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class ConfirmOrder extends AppCompatActivity {
-
     TextView restaurantNameTextView;
     TextView itemNameTextView;
     EditText phoneEditText;
     EditText locationEditText;
     Button confirmButton;
     NumberPicker amountPicker;
-
     String restaurantName;
     String itemID;
     String restaurantID;
@@ -43,36 +41,28 @@ public class ConfirmOrder extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_confirm_order);
-
-        initialize();
-
+        initializeViews();
         confirmButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 boolean isValid = validateInputs();
-
                 if (!isValid) {
                     return;
                 }
                 submitOrder();
-
             }
         });
-
     }
 
     private void submitOrder() {
-
         final User user = SharedPrefManager.getInstance(this).getUser();
         final String userID = user.getId();
         final String tempPhone = phoneEditText.getText().toString().trim();
         final String tempLocation = locationEditText.getText().toString().trim();
         final String itemAmount = String.valueOf(amountPicker.getValue());
-
         StringRequest stringRequest = new StringRequest(Request.Method.POST, Constants.SUBMIT_ORDER_URL, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-
                 try {
                     JSONObject obj = new JSONObject(response);
                     if (!obj.getBoolean("error")) {
@@ -86,7 +76,6 @@ public class ConfirmOrder extends AppCompatActivity {
                     e.printStackTrace();
                     Log.d(Constants.LOGTAG, e.getLocalizedMessage());
                 }
-
             }
         }, new Response.ErrorListener() {
             @Override
@@ -106,12 +95,10 @@ public class ConfirmOrder extends AppCompatActivity {
                 return params;
             }
         };
-
         AppSingleton.getInstance(getApplicationContext()).addToRequestQueue(stringRequest, Constants.REQUEST_TAG);
     }
 
     private boolean validateInputs() {
-
         String phone = phoneEditText.getText().toString();
         String location = locationEditText.getText().toString();
 
@@ -126,36 +113,28 @@ public class ConfirmOrder extends AppCompatActivity {
             locationEditText.requestFocus();
             return false;
         }
-
         return true;
     }
 
-    private void initialize() {
+    private void initializeViews() {
         restaurantNameTextView = findViewById(R.id.restaurant_name_textview);
         itemNameTextView = findViewById(R.id.item_name_textview);
         phoneEditText = findViewById(R.id.phone_edit_text);
         locationEditText = findViewById(R.id.location_edit_text);
         confirmButton = findViewById(R.id.confirm_button);
         amountPicker = findViewById(R.id.amount_picker);
-
         amountPicker.setMaxValue(10);
         amountPicker.setMinValue(1);
-
         Bundle bundle = getIntent().getExtras();
-
         if (bundle != null) {
             restaurantName = bundle.getString(Constants.RESTAURANT_NAME);
             itemID = bundle.getString(Constants.ITEM_ID);
             itemName = bundle.getString(Constants.ITEM_NAME);
             restaurantID = bundle.getString(Constants.RESTAURANT_ID);
-
             restaurantNameTextView.setText(restaurantName);
             itemNameTextView.setText(itemName);
-
             User user = SharedPrefManager.getInstance(this).getUser();
             phoneEditText.setText(user.getPhone());
-
         }
-
     }
 }

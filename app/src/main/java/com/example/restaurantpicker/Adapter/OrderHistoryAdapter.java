@@ -34,10 +34,8 @@ public class OrderHistoryAdapter extends
     @NonNull
     @Override
     public OrderHistoryViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-
         View itemView = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.order_history_list_view, parent, false);
-
         return new OrderHistoryViewHolder(itemView);
     }
 
@@ -48,7 +46,6 @@ public class OrderHistoryAdapter extends
         holder.amountTextView.setText(orderHistoryList.get(position).getAmount());
         holder.priceTextView.setText(orderHistoryList.get(position).getPrice());
         holder.orderTimeTextView.setText(orderHistoryList.get(position).getTimestamp());
-
     }
 
     @Override
@@ -57,7 +54,6 @@ public class OrderHistoryAdapter extends
     }
 
     public class OrderHistoryViewHolder extends RecyclerView.ViewHolder {
-
         TextView restaurantNameTextView;
         TextView itemNameTextView;
         TextView amountTextView;
@@ -73,6 +69,4 @@ public class OrderHistoryAdapter extends
             orderTimeTextView = itemView.findViewById(R.id.order_date_textview);
         }
     }
-
-
 }

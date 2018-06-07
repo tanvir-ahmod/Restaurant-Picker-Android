@@ -25,17 +25,14 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class UserRegistration extends AppCompatActivity {
-
     Button register;
     EditText editTextName, editTextEmail, editTextPassword, editTextPhone;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_registration);
         initialize();
-
         register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -49,40 +46,31 @@ public class UserRegistration extends AppCompatActivity {
         if (!isValidated) {
             return;
         }
-
         final String tempName = editTextName.getText().toString().trim();
         final String tempEmail = editTextEmail.getText().toString().trim();
         final String tempPassword = editTextPassword.getText().toString().trim();
         final String tempPhone = editTextPhone.getText().toString().trim();
-
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, Constants.USER_REGISTRATION_URL, new Response.Listener<String>() {
+        StringRequest stringRequest = new StringRequest(Request.Method.POST,
+                Constants.USER_REGISTRATION_URL, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-
                 try {
                     JSONObject obj = new JSONObject(response);
                     if (!obj.getBoolean("error")) {
-
                         Toast.makeText(getApplicationContext(), obj.getString("message"), Toast.LENGTH_SHORT).show();
                         JSONObject userJson = obj.getJSONObject("user");
-
                         saveUserInformation(userJson);
                         divertToNextActivity();
                     } else {
                         Toast.makeText(getApplicationContext(), obj.getString("message"), Toast.LENGTH_SHORT).show();
-                        //Log.d(Constants.LOGTAG, obj.getString("message"));
                     }
-
                 } catch (JSONException e) {
                     e.printStackTrace();
-                    Log.d(Constants.LOGTAG, e.getLocalizedMessage());
                 }
-
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-
             }
         }) {
             @Override
@@ -95,8 +83,8 @@ public class UserRegistration extends AppCompatActivity {
                 return params;
             }
         };
-
-        AppSingleton.getInstance(getApplicationContext()).addToRequestQueue(stringRequest, Constants.REQUEST_TAG);
+        AppSingleton.getInstance(getApplicationContext())
+                .addToRequestQueue(stringRequest, Constants.REQUEST_TAG);
     }
 
     private boolean validateData() {
@@ -140,7 +128,6 @@ public class UserRegistration extends AppCompatActivity {
                 userJson.getString("email"),
                 userJson.getString("phone")
         );
-
         //storing the user in shared preferences
         SharedPrefManager.getInstance(getApplicationContext()).userLogin(user);
     }
@@ -148,7 +135,6 @@ public class UserRegistration extends AppCompatActivity {
     private void divertToNextActivity() {
         finish();
         startActivity(new Intent(getApplicationContext(), GetAllRestaurants.class));
-
     }
 
     private void initialize() {

@@ -27,7 +27,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class UserProfile extends AppCompatActivity {
-
     TextView nameTextView;
     TextView emailTextView;
     TextView phoneTextView;
@@ -65,7 +64,6 @@ public class UserProfile extends AppCompatActivity {
                             //if no error in response
                             if (!obj.getBoolean("error")) {
                                 JSONArray histories = obj.getJSONArray("history");
-
                                 for (int i = 0; i < histories.length(); i++) {
                                     JSONObject history = histories.getJSONObject(i);
                                     OrderHistory orderHistory = new OrderHistory();

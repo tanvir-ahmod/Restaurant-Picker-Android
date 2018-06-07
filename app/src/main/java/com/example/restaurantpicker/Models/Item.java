@@ -13,7 +13,6 @@ public class Item {
     private String restaurantName;
 
     public Item() {
-
     }
 
     public Item(String id, String name, String price, String imageURL, String restaurantID) {

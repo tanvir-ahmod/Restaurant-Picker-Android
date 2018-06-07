@@ -23,7 +23,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class UpdateProfile extends AppCompatActivity {
-
     EditText nameEditText;
     EditText emailEditText;
     EditText passwordEditText;
@@ -36,7 +35,6 @@ public class UpdateProfile extends AppCompatActivity {
         setContentView(R.layout.activity_update_profile);
         initializeViews();
         setUserInfoToEditText();
-
         updateButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -77,10 +75,8 @@ public class UpdateProfile extends AppCompatActivity {
                 return params;
             }
         };
-
         AppSingleton.getInstance(getApplicationContext()).
                 addToRequestQueue(stringRequest, Constants.REQUEST_TAG);
-
     }
 
     private void saveUserInformation(JSONObject userJson) throws JSONException {
@@ -118,7 +114,6 @@ public class UpdateProfile extends AppCompatActivity {
         }
         return params;
     }
-
 
     private void initializeViews() {
         nameEditText = findViewById(R.id.editTextName);

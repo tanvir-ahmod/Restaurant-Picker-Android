@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -25,7 +24,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Login extends AppCompatActivity {
-
     Button loginButton;
     EditText editTextEmail, editTextPassword;
 
@@ -33,22 +31,17 @@ public class Login extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        initialize();
-
+        initializeViews();
         if (SharedPrefManager.getInstance(this).isLoggedIn()) {
             finish();
             startActivity(new Intent(this, GetAllRestaurants.class));
         }
-
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 userLogin();
-
             }
         });
-
     }
 
     private void userLogin() {
@@ -57,7 +50,6 @@ public class Login extends AppCompatActivity {
             return;
         final String tempEmail = editTextEmail.getText().toString();
         final String password = editTextPassword.getText().toString();
-
         //if everything is fine
         StringRequest stringRequest = new StringRequest(Request.Method.POST, Constants.USER_LOGIN_URL,
                 new Response.Listener<String>() {
@@ -66,16 +58,17 @@ public class Login extends AppCompatActivity {
                         try {
                             //converting response to json object
                             JSONObject obj = new JSONObject(response);
-
                             if (!obj.getBoolean("error")) {
-                                Toast.makeText(getApplicationContext(), obj.getString("message"), Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getApplicationContext(),
+                                        obj.getString("message"), Toast.LENGTH_SHORT).show();
 
                                 JSONObject userJson = obj.getJSONObject("user");
                                 saveUserInformation(userJson);
                                 divertToNextActivity();
 
                             } else {
-                                Toast.makeText(getApplicationContext(), obj.getString("message"), Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getApplicationContext(),
+                                        obj.getString("message"), Toast.LENGTH_SHORT).show();
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -85,9 +78,10 @@ public class Login extends AppCompatActivity {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(),
+                                error.getMessage(), Toast.LENGTH_SHORT).show();
                     }
-                }) {
+                }){
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> params = new HashMap<>();
@@ -96,36 +90,31 @@ public class Login extends AppCompatActivity {
                 return params;
             }
         };
-
-        AppSingleton.getInstance(getApplicationContext()).addToRequestQueue(stringRequest, Constants.REQUEST_TAG);
+        AppSingleton.getInstance(getApplicationContext())
+                .addToRequestQueue(stringRequest, Constants.REQUEST_TAG);
     }
 
     private boolean validateData() {
         final String tempEmail = editTextEmail.getText().toString();
         final String password = editTextPassword.getText().toString();
-
         //validating inputs
         if (TextUtils.isEmpty(tempEmail)) {
             editTextEmail.setError("Please enter your email");
             editTextEmail.requestFocus();
             return false;
         }
-
         if (!android.util.Patterns.EMAIL_ADDRESS.matcher(tempEmail).matches()) {
             editTextEmail.setError("Enter a valid email");
             editTextEmail.requestFocus();
             return false;
         }
-
         if (TextUtils.isEmpty(password)) {
             editTextPassword.setError("Please enter your password");
             editTextPassword.requestFocus();
             return false;
         }
-
         return true;
     }
-
 
     private void saveUserInformation(JSONObject userJson) throws JSONException {
         User user = new User(
@@ -134,7 +123,6 @@ public class Login extends AppCompatActivity {
                 userJson.getString("email"),
                 userJson.getString("phone")
         );
-
         //storing the user in shared preferences
         SharedPrefManager.getInstance(getApplicationContext()).userLogin(user);
     }
@@ -142,10 +130,9 @@ public class Login extends AppCompatActivity {
     private void divertToNextActivity() {
         finish();
         startActivity(new Intent(getApplicationContext(), GetAllRestaurants.class));
-
     }
 
-    private void initialize() {
+    private void initializeViews() {
         loginButton = findViewById(R.id.buttonLogin);
         editTextEmail = findViewById(R.id.editTextUserEmail);
         editTextPassword = findViewById(R.id.editTextPassword);
