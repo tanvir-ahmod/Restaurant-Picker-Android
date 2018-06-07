@@ -44,7 +44,7 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Re
         holder.restaurantName.setText(restaurantList.get(position).getName());
         holder.restaurantPhone.setText(restaurantList.get(position).getPhone());
 
-        String imageUrl = Constants.RESTAURANT_IMAGE_URL + restaurantList.get(position).getImage();
+        final String imageUrl = Constants.RESTAURANT_IMAGE_URL + restaurantList.get(position).getImage();
         Glide.with(context).load(imageUrl).into(holder.restaurantImage);
 
         holder.relativeLayout.setOnClickListener(new View.OnClickListener() {
@@ -52,6 +52,9 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Re
             public void onClick(View v) {
                 Intent intent = new Intent(context, RestaurantItems.class);
                 intent.putExtra(Constants.RESTAURANT_ID, restaurantList.get(position).getId());
+                intent.putExtra(Constants.RESTAURANT_NAME, restaurantList.get(position).getName());
+                intent.putExtra(Constants.RESTAURANT_PHONE, restaurantList.get(position).getPhone());
+                intent.putExtra(Constants.RESTAURANT_IMAGE, imageUrl);
                 context.startActivity(intent);
             }
         });

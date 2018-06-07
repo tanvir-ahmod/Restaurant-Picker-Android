@@ -16,7 +16,6 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.example.restaurantpicker.Adapter.OrderHistoryAdapter;
 import com.example.restaurantpicker.Models.OrderHistory;
-import com.example.restaurantpicker.Models.Restaurant;
 import com.example.restaurantpicker.Models.User;
 import com.example.restaurantpicker.SharedPreferenceManager.SharedPrefManager;
 
@@ -111,9 +110,9 @@ public class UserProfile extends AppCompatActivity {
     }
 
     private void initializeViews() {
-        nameTextView = findViewById(R.id.user_name_textview);
-        emailTextView = findViewById(R.id.user_email_textview);
-        phoneTextView = findViewById(R.id.user_phone_textview);
+        nameTextView = findViewById(R.id.restaurant_name_textview);
+        emailTextView = findViewById(R.id.restaurant_email_textview);
+        phoneTextView = findViewById(R.id.restaurant_phone_textview);
         updateButton = findViewById(R.id.update_button);
         recyclerView = findViewById(R.id.order_history_recyclerview);
     }
