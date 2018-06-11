@@ -11,6 +11,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.SearchView;
 
 import com.android.volley.Request;
 import com.android.volley.Response;
@@ -31,31 +32,40 @@ public class GetAllRestaurants extends AppCompatActivity {
     private ArrayList<Restaurant> restaurantsData = new ArrayList<>();
     RecyclerView recyclerView;
     RestaurantAdapter restaurantAdapter;
-    EditText editTextSearch;
-    Button searchButton;
+    SearchView searchView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_get_all_restaurants);
-        editTextSearch = findViewById(R.id.search_edit_text);
-        searchButton = findViewById(R.id.search_button);
-        recyclerView = findViewById(R.id.all_restaurant_recyclerview);
+        initializeViews();
+
         restaurantAdapter = new RestaurantAdapter(restaurantsData, this);
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setAdapter(restaurantAdapter);
         getAllRestaurants();
 
-        searchButton.setOnClickListener(new View.OnClickListener() {
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
-            public void onClick(View v) {
-                String searchKey = editTextSearch.getText().toString();
-                Intent intent = new Intent(GetAllRestaurants.this, SearchResult.class);
-                intent.putExtra(Constants.SEARCH_KEY, searchKey);
+            public boolean onQueryTextSubmit(String query) {
+                Intent intent = new Intent(GetAllRestaurants.this,
+                        SearchResult.class);
+                intent.putExtra(Constants.SEARCH_KEY, query);
                 startActivity(intent);
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                return false;
             }
         });
+    }
+
+    private void initializeViews() {
+        recyclerView = findViewById(R.id.all_restaurant_recyclerview);
+        searchView = findViewById(R.id.search_view);
     }
 
     private void getAllRestaurants() {
@@ -93,7 +103,6 @@ public class GetAllRestaurants extends AppCompatActivity {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Log.d(Constants.LOGTAG, "VolleyError : " + error.getMessage());
                     }
                 });
         AppSingleton.getInstance(getApplicationContext())
