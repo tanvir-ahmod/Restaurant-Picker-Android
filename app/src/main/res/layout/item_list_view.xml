@@ -36,7 +36,7 @@
                 android:paddingRight="@dimen/album_title_padding"
                 android:paddingTop="@dimen/album_title_padding"
                 android:text="TextView"
-                android:visibility="gone"/>
+                android:visibility="gone" />
 
             <TextView
                 android:id="@+id/item_name"
@@ -46,6 +46,7 @@
                 android:paddingLeft="@dimen/album_title_padding"
                 android:paddingRight="@dimen/album_title_padding"
                 android:paddingTop="@dimen/album_title_padding"
+                android:textSize="16sp"
                 android:text="TextView" />
 
             <TextView
@@ -55,6 +56,7 @@
                 android:layout_below="@+id/item_name"
                 android:paddingBottom="@dimen/songs_count_padding_bottom"
                 android:paddingLeft="@dimen/album_title_padding"
+                android:textSize="16sp"
                 android:paddingRight="@dimen/album_title_padding"
                 android:text="TextView" />
 
@@ -66,7 +68,8 @@
                 android:layout_below="@+id/item_name"
                 android:clickable="true"
                 card_view:fabSize="mini"
-                card_view:srcCompat="@android:drawable/checkbox_on_background" />
+                android:layout_margin="5dp"
+                card_view:srcCompat="@drawable/cart_icon" />
         </RelativeLayout>
     </android.support.v7.widget.CardView>
 

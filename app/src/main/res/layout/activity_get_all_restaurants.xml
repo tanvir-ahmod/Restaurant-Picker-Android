@@ -3,6 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_marginEnd="8dp"
+    android:layout_marginStart="8dp"
     android:orientation="vertical"
     tools:context="com.example.restaurantpicker.GetAllRestaurants">
 
@@ -11,14 +13,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:queryHint="Search any food items" />
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:text="List of Restaurants"
-        android:textColor="@android:color/black"
-        android:textSize="20sp" />
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/all_restaurant_recyclerview"

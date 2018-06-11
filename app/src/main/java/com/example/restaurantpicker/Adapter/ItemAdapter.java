@@ -35,6 +35,7 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
         this.itemList = itemList;
         this.context = context;
     }
+
     //Used to visible / invisible restaurant name in recycler view
     public void setVisibleRestaurantName(boolean visibleRestaurantName) {
         this.visibleRestaurantName = visibleRestaurantName;
@@ -51,7 +52,7 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
     @Override
     public void onBindViewHolder(@NonNull ItemAdapter.ItemViewHolder holder, final int position) {
         holder.itemName.setText(itemList.get(position).getName());
-        holder.itemPrice.setText(itemList.get(position).getPrice());
+        holder.itemPrice.setText("Price : " + itemList.get(position).getPrice() + " tk.");
         String imageURL = Constants.SERVER + itemList.get(position).getImageURL();
         Glide.with(context).load(imageURL).into(holder.itemImage);
         if (visibleRestaurantName) {

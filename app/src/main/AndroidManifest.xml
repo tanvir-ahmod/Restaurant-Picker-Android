@@ -15,7 +15,8 @@
         <activity android:name=".Login">
 
         </activity>
-        <activity android:name=".GetAllRestaurants" />
+        <activity android:name=".GetAllRestaurants"
+            android:label="List of Restaurants"/>
         <activity android:name=".RestaurantItems" />
         <activity android:name=".SearchResult" />
         <activity android:name=".ConfirmOrder" />
