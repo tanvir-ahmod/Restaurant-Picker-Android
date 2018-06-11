@@ -66,9 +66,11 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
             public void onClick(View v) {
                 Intent intent = new Intent(context, ConfirmOrder.class);
                 intent.putExtra(Constants.ITEM_ID, itemList.get(position).getId());
-                intent.putExtra(Constants.RESTAURANT_NAME, itemList.get(position).getRestaurantName());
+                intent.putExtra(Constants.RESTAURANT_NAME, itemList.get(position).
+                        getRestaurantName());
                 intent.putExtra(Constants.ITEM_NAME, itemList.get(position).getName());
-                intent.putExtra(Constants.RESTAURANT_ID, itemList.get(position).getRestaurantID());
+                intent.putExtra(Constants.RESTAURANT_ID, itemList.get(position).
+                        getRestaurantID());
                 context.startActivity(intent);
             }
         });

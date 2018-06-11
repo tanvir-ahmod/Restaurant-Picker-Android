@@ -28,7 +28,6 @@ public class SearchResult extends AppCompatActivity {
     private String searchKey;
     private RelativeLayout restaurantInfoLayout;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

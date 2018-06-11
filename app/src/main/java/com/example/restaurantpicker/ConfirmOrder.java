@@ -1,13 +1,13 @@
 package com.example.restaurantpicker;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.NumberPicker;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -31,7 +31,7 @@ public class ConfirmOrder extends AppCompatActivity {
     EditText phoneEditText;
     EditText locationEditText;
     Button confirmButton;
-    NumberPicker amountPicker;
+    Spinner amountPicker;
     String restaurantName;
     String itemID;
     String restaurantID;
@@ -59,7 +59,7 @@ public class ConfirmOrder extends AppCompatActivity {
         final String userID = user.getId();
         final String tempPhone = phoneEditText.getText().toString().trim();
         final String tempLocation = locationEditText.getText().toString().trim();
-        final String itemAmount = String.valueOf(amountPicker.getValue());
+        final String itemAmount = String.valueOf(amountPicker.getSelectedItem());
         String URL = Constants.SERVER + Constants.SUBMIT_ORDER_URL;
         StringRequest stringRequest = new StringRequest(Request.Method.POST,
                 URL, new Response.Listener<String>() {
@@ -125,8 +125,7 @@ public class ConfirmOrder extends AppCompatActivity {
         locationEditText = findViewById(R.id.location_edit_text);
         confirmButton = findViewById(R.id.confirm_button);
         amountPicker = findViewById(R.id.amount_picker);
-        amountPicker.setMaxValue(10);
-        amountPicker.setMinValue(1);
+
         Bundle bundle = getIntent().getExtras();
         if (bundle != null) {
             restaurantName = bundle.getString(Constants.RESTAURANT_NAME);
@@ -137,6 +136,8 @@ public class ConfirmOrder extends AppCompatActivity {
             itemNameTextView.setText(itemName);
             User user = SharedPrefManager.getInstance(this).getUser();
             phoneEditText.setText(user.getPhone());
+
+            Log.d(Constants.LOGTAG, "Name " +restaurantName);
         }
     }
 }

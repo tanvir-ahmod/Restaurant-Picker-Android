@@ -24,6 +24,7 @@ import java.util.ArrayList;
 
 public class RestaurantItems extends AppCompatActivity {
     String restaurantID;
+    String restaurantName;
     private ArrayList<Item> itemData = new ArrayList<>();
     private RecyclerView recyclerView;
     private ItemAdapter itemAdapter;
@@ -50,7 +51,7 @@ public class RestaurantItems extends AppCompatActivity {
         Bundle bundle = getIntent().getExtras();
         if (bundle != null) {
             restaurantID = bundle.getString(Constants.RESTAURANT_ID);
-            String restaurantName = bundle.getString(Constants.RESTAURANT_NAME);
+            restaurantName = bundle.getString(Constants.RESTAURANT_NAME);
             String restaurantPhone = bundle.getString(Constants.RESTAURANT_PHONE);
             String restaurantImageURL = bundle.getString(Constants.RESTAURANT_IMAGE);
             restaurantNameTextView.setText(restaurantName);
@@ -86,6 +87,7 @@ public class RestaurantItems extends AppCompatActivity {
                                     String price = item.getString("price");
                                     String image = item.getString("image");
                                     Item itemModel = new Item(id, name, price, image, restaurantId);
+                                    itemModel.setRestaurantName(restaurantName);
                                     itemData.add(itemModel);
                                 }
                             } else {
