@@ -27,4 +27,7 @@
 
     <!-- User profile -->
     <dimen name="linearlayouts">10dp</dimen>
+
+    <!-- Confirm Order -->
+    <dimen name="text_views">18sp</dimen>
 </resources>
