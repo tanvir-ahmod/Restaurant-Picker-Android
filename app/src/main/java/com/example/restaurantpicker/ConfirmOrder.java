@@ -1,9 +1,9 @@
 package com.example.restaurantpicker;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -68,21 +68,21 @@ public class ConfirmOrder extends AppCompatActivity {
                 try {
                     JSONObject obj = new JSONObject(response);
                     if (!obj.getBoolean("error")) {
-                        Toast.makeText(getApplicationContext(), obj.getString("message"), Toast.LENGTH_SHORT).show();
-
+                        Toast.makeText(getApplicationContext(), obj.getString("message"),
+                                Toast.LENGTH_SHORT).show();
+                        startActivity(new Intent(ConfirmOrder.this,
+                                UserProfile.class));
                     } else {
-                        Toast.makeText(getApplicationContext(), obj.getString("message"), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), obj.getString("message"),
+                                Toast.LENGTH_SHORT).show();
                     }
-
                 } catch (JSONException e) {
                     e.printStackTrace();
-                    Log.d(Constants.LOGTAG, e.getLocalizedMessage());
                 }
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-
             }
         }) {
             @Override
@@ -97,7 +97,8 @@ public class ConfirmOrder extends AppCompatActivity {
                 return params;
             }
         };
-        AppSingleton.getInstance(getApplicationContext()).addToRequestQueue(stringRequest, Constants.REQUEST_TAG);
+        AppSingleton.getInstance(getApplicationContext())
+                .addToRequestQueue(stringRequest, Constants.REQUEST_TAG);
     }
 
     private boolean validateInputs() {
@@ -136,8 +137,6 @@ public class ConfirmOrder extends AppCompatActivity {
             itemNameTextView.setText(itemName);
             User user = SharedPrefManager.getInstance(this).getUser();
             phoneEditText.setText(user.getPhone());
-
-            Log.d(Constants.LOGTAG, "Name " +restaurantName);
         }
     }
 }
