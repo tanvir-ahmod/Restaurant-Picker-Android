@@ -5,6 +5,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.View;
+import android.widget.RelativeLayout;
 
 import com.android.volley.Request;
 import com.android.volley.Response;
@@ -23,19 +25,26 @@ public class SearchResult extends AppCompatActivity {
     private ArrayList<Item> itemData = new ArrayList<>();
     private RecyclerView recyclerView;
     private ItemAdapter itemAdapter;
-    String searchKey;
+    private String searchKey;
+    private RelativeLayout restaurantInfoLayout;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_restaurant_items);
         recyclerView = findViewById(R.id.item_recycler_view);
+        restaurantInfoLayout = findViewById(R.id.restaurant_info_layout);
+        restaurantInfoLayout.setVisibility(View.GONE);
+
         itemAdapter = new ItemAdapter(itemData, this);
         itemAdapter.setVisibleRestaurantName(true); //To visible restaurant name
+
         RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(this, 2);
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setAdapter(itemAdapter);
         Bundle bundle = getIntent().getExtras();
+
         if (bundle != null) {
             searchKey = bundle.getString(Constants.SEARCH_KEY);
         }
@@ -77,7 +86,6 @@ public class SearchResult extends AppCompatActivity {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Log.d(Constants.LOGTAG, error.getMessage());
                     }
                 });
         AppSingleton.getInstance(getApplicationContext())

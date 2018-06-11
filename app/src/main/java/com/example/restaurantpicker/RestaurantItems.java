@@ -38,6 +38,7 @@ public class RestaurantItems extends AppCompatActivity {
         setContentView(R.layout.activity_restaurant_items);
         initializeViews();
         displayRestaurantInfo();
+
         itemAdapter = new ItemAdapter(itemData, this);
         RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(this, 2);
         recyclerView.setLayoutManager(mLayoutManager);

@@ -11,16 +11,18 @@
         android:layout_margin="@dimen/card_margin"
         android:elevation="3dp">
 
-        <RelativeLayout
+        <LinearLayout
             android:id="@+id/restaurant_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/restaurant_relative_margin">
+            android:layout_margin="@dimen/restaurant_relative_margin"
+            android:orientation="vertical">
 
             <ImageView
                 android:id="@+id/restaurant_image"
-                android:layout_width="@dimen/restaurant_image_width"
-                android:layout_height="@dimen/restaurant_image_height"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/album_cover_height"
+                android:background="?attr/selectableItemBackgroundBorderless"
                 android:clickable="true"
                 android:focusable="true"
                 android:scaleType="centerCrop"
@@ -30,7 +32,6 @@
                 android:id="@+id/restaurant_name_textview"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_toEndOf="@+id/restaurant_image"
                 android:paddingLeft="@dimen/album_title_padding"
                 android:paddingRight="@dimen/album_title_padding"
                 android:paddingTop="@dimen/album_title_padding"
@@ -41,13 +42,11 @@
                 android:id="@+id/restaurant_phone_textview"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/restaurant_name_textview"
-                android:layout_toEndOf="@+id/restaurant_image"
                 android:paddingBottom="@dimen/songs_count_padding_bottom"
                 android:paddingLeft="@dimen/album_title_padding"
                 android:paddingRight="@dimen/album_title_padding"
                 android:text="TextView"
                 android:textSize="@dimen/restaurant_phone" />
-        </RelativeLayout>
+        </LinearLayout>
     </android.support.v7.widget.CardView>
 </LinearLayout>

@@ -8,6 +8,7 @@
     tools:context="com.example.restaurantpicker.RestaurantItems">
 
     <RelativeLayout
+        android:id="@+id/restaurant_info_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
