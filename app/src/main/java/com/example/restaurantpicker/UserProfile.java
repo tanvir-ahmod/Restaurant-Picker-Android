@@ -69,6 +69,7 @@ public class UserProfile extends AppCompatActivity {
                                     orderHistory.setRestaurnatName(history.getString("restaurant_name"));
                                     orderHistory.setItemName(history.getString("item_name"));
                                     orderHistory.setPrice(history.getString("price"));
+                                    orderHistory.setAmount(history.getString("amount"));
                                     orderHistory.setTimestamp(history.getString("order_time"));
                                     orderHistoryList.add(orderHistory);
                                 }

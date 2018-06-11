@@ -20,7 +20,9 @@
         <activity android:name=".RestaurantItems" />
         <activity android:name=".SearchResult" />
         <activity android:name=".ConfirmOrder" />
-        <activity android:name=".UserProfile"></activity>
+        <activity android:name=".UserProfile">
+
+        </activity>
         <activity android:name=".UpdateProfile" />
         <activity android:name=".Setting">
             <intent-filter>
