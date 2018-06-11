@@ -7,6 +7,7 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -26,20 +27,30 @@ import java.util.Map;
 public class Login extends AppCompatActivity {
     Button loginButton;
     EditText editTextEmail, editTextPassword;
+    TextView textViewRegister;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         initializeViews();
+
         if (SharedPrefManager.getInstance(this).isLoggedIn()) {
             finish();
             startActivity(new Intent(this, GetAllRestaurants.class));
         }
+
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 userLogin();
+            }
+        });
+        textViewRegister.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+                startActivity(new Intent(Login.this, UserRegistration.class));
             }
         });
     }
@@ -137,5 +148,6 @@ public class Login extends AppCompatActivity {
         loginButton = findViewById(R.id.buttonLogin);
         editTextEmail = findViewById(R.id.editTextUserEmail);
         editTextPassword = findViewById(R.id.editTextPassword);
+        textViewRegister = findViewById(R.id.textViewRegister);
     }
 }

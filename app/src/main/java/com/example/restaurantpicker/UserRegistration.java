@@ -1,13 +1,13 @@
 package com.example.restaurantpicker;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -26,17 +26,30 @@ import java.util.Map;
 
 public class UserRegistration extends AppCompatActivity {
     Button register;
-    EditText editTextName, editTextEmail, editTextPassword, editTextPhone;
+    EditText editTextName;
+    EditText editTextEmail;
+    EditText editTextPassword;
+    EditText editTextPhone;
+    TextView loginTextView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_registration);
         initialize();
+
         register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 registerUser();
+            }
+        });
+
+        loginTextView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+                startActivity(new Intent(UserRegistration.this, Login.class));
             }
         });
     }
@@ -58,12 +71,14 @@ public class UserRegistration extends AppCompatActivity {
                 try {
                     JSONObject obj = new JSONObject(response);
                     if (!obj.getBoolean("error")) {
-                        Toast.makeText(getApplicationContext(), obj.getString("message"), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(),
+                                obj.getString("message"), Toast.LENGTH_SHORT).show();
                         JSONObject userJson = obj.getJSONObject("user");
                         saveUserInformation(userJson);
                         divertToNextActivity();
                     } else {
-                        Toast.makeText(getApplicationContext(), obj.getString("message"), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(),
+                                obj.getString("message"), Toast.LENGTH_SHORT).show();
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -144,5 +159,6 @@ public class UserRegistration extends AppCompatActivity {
         editTextEmail = findViewById(R.id.editTextEmail);
         editTextPassword = findViewById(R.id.editTextPassword);
         editTextPhone = findViewById(R.id.editTextPhone);
+        loginTextView = findViewById(R.id.textViewLogin);
     }
 }
