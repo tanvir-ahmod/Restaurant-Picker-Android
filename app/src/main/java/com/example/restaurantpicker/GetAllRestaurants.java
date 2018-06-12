@@ -122,6 +122,9 @@ public class GetAllRestaurants extends AppCompatActivity {
         if (id == R.id.profile) {
             startActivity(new Intent(this, UserProfile.class));
         }
+        if (id == R.id.setting) {
+            startActivity(new Intent(this, Setting.class));
+        }
         if (id == R.id.logout) {
             SharedPrefManager.getInstance(this).logout();
             finish();

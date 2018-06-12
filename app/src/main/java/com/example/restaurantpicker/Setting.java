@@ -36,7 +36,7 @@ public class Setting extends AppCompatActivity {
         String URL = serverURLEditText.getText().toString();
         if (!TextUtils.isEmpty(URL)) {
             SharedPrefManager.getInstance(this).saveSrverURL(URL);
-            Constants.SERVER = URL + Constants.BASE_URL;
+            Constants.SERVER = URL;
         }
     }
 
