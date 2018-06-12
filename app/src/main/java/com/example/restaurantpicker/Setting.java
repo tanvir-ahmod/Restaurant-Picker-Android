@@ -27,7 +27,7 @@ public class Setting extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 saveServerUrl();
-                startActivity(new Intent(Setting.this, GetAllRestaurants.class));
+                startActivity(new Intent(Setting.this, Login.class));
             }
         });
     }

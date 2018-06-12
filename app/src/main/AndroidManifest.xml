@@ -11,20 +11,51 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".UserRegistration" />
-        <activity android:name=".Login">
+        <activity
+            android:name=".UserRegistration"
+            android:label="Register" />
+        <activity
+            android:name=".Login"
+            android:label="Login">
 
         </activity>
-        <activity android:name=".GetAllRestaurants"
-            android:label="List of Restaurants"/>
-        <activity android:name=".RestaurantItems" />
-        <activity android:name=".SearchResult" />
-        <activity android:name=".ConfirmOrder" />
-        <activity android:name=".UserProfile">
-
+        <activity
+            android:name=".GetAllRestaurants"
+            android:label="List of Restaurants" />
+        <activity android:name=".RestaurantItems">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".GetAllRestaurants" />
         </activity>
-        <activity android:name=".UpdateProfile" />
-        <activity android:name=".Setting">
+        <activity android:name=".SearchResult">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".GetAllRestaurants" />
+        </activity>
+        <activity
+            android:name=".ConfirmOrder"
+            android:label="Confirm Order">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".GetAllRestaurants" />
+        </activity>
+        <activity
+            android:name=".UserProfile"
+            android:label="User Profile">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".GetAllRestaurants" />
+        </activity>
+        <activity
+            android:name=".UpdateProfile"
+            android:label="Update Profile">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".UserProfile" />
+        </activity>
+        <activity
+            android:name=".Setting"
+            android:label="Setup Server">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
