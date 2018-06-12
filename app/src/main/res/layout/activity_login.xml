@@ -40,6 +40,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
             android:layout_marginTop="8dp"
+            android:background="@android:color/holo_orange_dark"
             android:text="Login" />
 
         <TextView
@@ -55,10 +56,10 @@
     </LinearLayout>
 
     <ProgressBar
-        android:visibility="gone"
         android:id="@+id/progressBar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true" />
+        android:layout_centerVertical="true"
+        android:visibility="gone" />
 </RelativeLayout>

@@ -9,7 +9,7 @@ public class Constants {
     public static final String REQUEST_TAG = "com.example.restaurantpicker";
     public static final String LOGTAG = "logtag";
 
-    public static String SERVER = "http://192.168.0.102/";
+    public static String SERVER = "http://restaurantpicker.000webhostapp.com/";
     public static String BASE_URL = "Restaurant%20Picker/";
 
     // To get restaurant info
