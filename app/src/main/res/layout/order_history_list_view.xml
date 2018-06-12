@@ -52,8 +52,8 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="@string/item_name"
-                    android:textSize="16sp"
-                    android:textColor="@android:color/black" />
+                    android:textColor="@android:color/black"
+                    android:textSize="16sp" />
 
                 <TextView
                     android:id="@+id/item_name_textview"
@@ -72,8 +72,8 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="@string/amount"
-                    android:textSize="16sp"
-                    android:textColor="@android:color/black" />
+                    android:textColor="@android:color/black"
+                    android:textSize="16sp" />
 
                 <TextView
                     android:id="@+id/amount_textview"
@@ -92,7 +92,8 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:text="@string/price"
-                    android:textColor="@android:color/black" />
+                    android:textColor="@android:color/black"
+                    android:textSize="16sp" />
 
                 <TextView
                     android:id="@+id/price_textview"
@@ -111,7 +112,9 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="@string/order_time"
-                    android:textColor="@android:color/black" />
+
+                    android:textColor="@android:color/black"
+                    android:textSize="16sp" />
 
                 <TextView
                     android:id="@+id/order_date_textview"
