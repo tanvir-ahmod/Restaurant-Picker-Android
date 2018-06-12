@@ -1,12 +1,16 @@
 package com.example.restaurantpicker;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.android.volley.Request;
 import com.android.volley.Response;
@@ -14,6 +18,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.example.restaurantpicker.Adapter.ItemAdapter;
 import com.example.restaurantpicker.Models.Item;
+import com.example.restaurantpicker.SharedPreferenceManager.SharedPrefManager;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -27,11 +32,15 @@ public class SearchResult extends AppCompatActivity {
     private ItemAdapter itemAdapter;
     private String searchKey;
     private RelativeLayout restaurantInfoLayout;
+    TextView searchResultTextView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_restaurant_items);
+        searchResultTextView = findViewById(R.id.search_result_text_view);
+        searchResultTextView.setText("Search Result");
+
         recyclerView = findViewById(R.id.item_recycler_view);
         restaurantInfoLayout = findViewById(R.id.restaurant_info_layout);
         restaurantInfoLayout.setVisibility(View.GONE);
@@ -89,5 +98,25 @@ public class SearchResult extends AppCompatActivity {
                 });
         AppSingleton.getInstance(getApplicationContext())
                 .addToRequestQueue(stringRequest, Constants.REQUEST_TAG);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        if (id == R.id.profile) {
+            startActivity(new Intent(this, UserProfile.class));
+        }
+        if (id == R.id.logout) {
+            SharedPrefManager.getInstance(this).logout();
+            finish();
+            startActivity(new Intent(this, Login.class));
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

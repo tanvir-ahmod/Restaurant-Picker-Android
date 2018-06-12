@@ -1,10 +1,13 @@
 package com.example.restaurantpicker;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -15,6 +18,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.bumptech.glide.Glide;
 import com.example.restaurantpicker.Adapter.ItemAdapter;
 import com.example.restaurantpicker.Models.Item;
+import com.example.restaurantpicker.SharedPreferenceManager.SharedPrefManager;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -108,5 +112,25 @@ public class RestaurantItems extends AppCompatActivity {
 
         AppSingleton.getInstance(getApplicationContext())
                 .addToRequestQueue(stringRequest, Constants.REQUEST_TAG);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        if (id == R.id.profile) {
+            startActivity(new Intent(this, UserProfile.class));
+        }
+        if (id == R.id.logout) {
+            SharedPrefManager.getInstance(this).logout();
+            finish();
+            startActivity(new Intent(this, Login.class));
+        }
+        return super.onOptionsItemSelected(item);
     }
 }
