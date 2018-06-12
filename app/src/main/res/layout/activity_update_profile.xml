@@ -57,6 +57,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
             android:layout_marginTop="8dp"
+            android:background="@android:color/holo_orange_dark"
             android:text="Update" />
 
     </LinearLayout>
