@@ -39,6 +39,12 @@ public class UserProfile extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_profile);
+
+        if (SharedPrefManager.getInstance(this).isLoggedIn()) {
+            finish();
+            startActivity(new Intent(UserProfile.this, Login.class));
+        }
+
         initializeViews();
         initializeAdapters();
         makeVisibleUserInfo();

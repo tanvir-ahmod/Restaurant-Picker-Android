@@ -4,11 +4,9 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import com.example.restaurantpicker.SharedPreferenceManager.SharedPrefManager;
 
@@ -27,7 +25,7 @@ public class Setting extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 saveServerUrl();
-                startActivity(new Intent(Setting.this, Login.class));
+                startActivity(new Intent(Setting.this, GetAllRestaurants.class));
             }
         });
     }
@@ -35,7 +33,7 @@ public class Setting extends AppCompatActivity {
     private void saveServerUrl() {
         String URL = serverURLEditText.getText().toString();
         if (!TextUtils.isEmpty(URL)) {
-            SharedPrefManager.getInstance(this).saveSrverURL(URL);
+            SharedPrefManager.getInstance(this).saveServerURL(URL);
             Constants.SERVER = URL;
         }
     }

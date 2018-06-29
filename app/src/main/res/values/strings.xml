@@ -6,7 +6,7 @@
     <string name="item_name">Item Name : </string>
     <string name="restaurant_name">Restaurant Name : </string>
     <string name="phone">Phone : </string>
-    <string name="location">Location : </string>
+    <string name="address">Address : </string>
     <string name="amount">Amount : </string>
 
     <!-- Order History-->

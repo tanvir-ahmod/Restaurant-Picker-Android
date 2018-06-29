@@ -51,7 +51,13 @@ public class ConfirmOrder extends AppCompatActivity {
                 if (!isValid) {
                     return;
                 }
-                submitOrder();
+                if (SharedPrefManager.getInstance(ConfirmOrder.this).isLoggedIn())
+                    submitOrder();
+                else {
+                    Toast.makeText(getApplicationContext(), "Please login first",
+                            Toast.LENGTH_SHORT).show();
+                    startActivity(new Intent(ConfirmOrder.this, Login.class));
+                }
             }
         });
     }
@@ -65,6 +71,7 @@ public class ConfirmOrder extends AppCompatActivity {
         String URL = Constants.SERVER + Constants.SUBMIT_ORDER_URL;
         StringRequest stringRequest = new StringRequest(Request.Method.POST,
                 URL, new Response.Listener<String>() {
+
             @Override
             public void onResponse(String response) {
                 try {
@@ -128,8 +135,8 @@ public class ConfirmOrder extends AppCompatActivity {
         locationEditText = findViewById(R.id.location_edit_text);
         confirmButton = findViewById(R.id.confirm_button);
         amountPicker = findViewById(R.id.amount_picker);
-
         Bundle bundle = getIntent().getExtras();
+
         if (bundle != null) {
             restaurantName = bundle.getString(Constants.RESTAURANT_NAME);
             itemID = bundle.getString(Constants.ITEM_ID);

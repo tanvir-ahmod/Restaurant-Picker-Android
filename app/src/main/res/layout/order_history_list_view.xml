@@ -112,7 +112,6 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="@string/order_time"
-
                     android:textColor="@android:color/black"
                     android:textSize="16sp" />
 
