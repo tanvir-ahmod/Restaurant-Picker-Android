@@ -54,8 +54,7 @@
                 android:value=".UserProfile" />
         </activity>
         <activity
-            android:name=".Setting"
-            android:label="Setup Server">
+            android:name=".Setting">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
