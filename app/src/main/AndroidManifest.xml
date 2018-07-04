@@ -13,11 +13,17 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".UserRegistration"
-            android:label="Register" />
+            android:label="Register">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".GetAllRestaurants" />
+        </activity>
         <activity
             android:name=".Login"
             android:label="Login">
-
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".GetAllRestaurants" />
         </activity>
         <activity
             android:name=".GetAllRestaurants"
@@ -53,8 +59,7 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".UserProfile" />
         </activity>
-        <activity
-            android:name=".Setting">
+        <activity android:name=".Setting">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

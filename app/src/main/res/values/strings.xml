@@ -10,8 +10,8 @@
     <string name="amount">Amount : </string>
 
     <!-- Order History-->
-    <string name="price">Price</string>
-    <string name="order_time">Order Time</string>
+    <string name="price">Price : </string>
+    <string name="order_time">Order Time : </string>
 
     <string-array name="order_amount">
         <item>1</item>

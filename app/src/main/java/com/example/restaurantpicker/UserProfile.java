@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.Response;
@@ -40,7 +41,9 @@ public class UserProfile extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_profile);
 
-        if (SharedPrefManager.getInstance(this).isLoggedIn()) {
+        if (!SharedPrefManager.getInstance(this).isLoggedIn()) {
+            Toast.makeText(getApplicationContext(), "please login first!",
+                    Toast.LENGTH_SHORT).show();
             finish();
             startActivity(new Intent(UserProfile.this, Login.class));
         }
