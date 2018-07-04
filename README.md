@@ -7,9 +7,9 @@ Link of the web project: https://github.com/shoukhin93/Restaurant-Picker-web-par
 
 ## Screenshots
 <div style="display:flex;" >
-<img  src="screenshots/1.png" width="25%" >
-<img style="margin-left:10px;" src="screenshots/2.png" width="25%" >
-<img style="margin-left:10px;" src="screenshots/3.png" width="25%" >
-<img style="margin-left:10px;" src="screenshots/4.png" width="25%" >
+<img  src="screenshots/1.png" width="20%" >
+<img style="margin-left:10px;" src="screenshots/2.png" width="20%" >
+<img style="margin-left:10px;" src="screenshots/3.png" width="20%" >
+<img style="margin-left:10px;" src="screenshots/4.png" width="20%" >
 
 </div>
